@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+
+block content
+
+  h1 Danh sách laptop
+
+  .product-list
+    each item in products
+
+      .product-item
+        img(
+          src=item.thumbnail
+          width="200"
+        )
+
+        h2= item.name
+
+        p Giá: #{item.priceOut} VNĐ
+
+        p RAM: #{item.specifications.ram.size} GB
+
+        p CPU: #{item.specifications.cpu.model}
+
+        p VGA: #{item.specifications.gpu.model}
