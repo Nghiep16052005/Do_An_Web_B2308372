@@ -1,3 +1,24 @@
-header
-  h2 WEB BÁN LAPTOP
-  hr
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    .container
+
+        a.navbar-brand(href="/")
+            | Laptop Store
+
+        button.navbar-toggler(
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+        )
+            span.navbar-toggler-icon
+
+        .collapse.navbar-collapse#navbarNav
+
+            ul.navbar-nav.ms-auto
+
+                li.nav-item
+                    a.nav-link(href="/")
+                        | Trang chủ
+
+                li.nav-item
+                    a.nav-link(href="/products")
+                        | Sản phẩm

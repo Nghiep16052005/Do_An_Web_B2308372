@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
 
     ram: {
       size: Number,
-      type: String
+      type_: String
     },
 
     gpu: {
@@ -45,7 +45,7 @@ const productSchema = new mongoose.Schema(
     },
 
     storage: {
-      type: String,
+      type_: String,
       capacity: String
     },
 

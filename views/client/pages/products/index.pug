@@ -2,23 +2,59 @@ extends ../../layouts/default.pug
 
 block content
 
-  h1 Danh sách laptop
+    h1.mb-4.fw-bold.text-center
+        | Danh sách Laptop Gaming
 
-  .product-list
-    each item in products
+    .row
 
-      .product-item
-        img(
-          src=item.thumbnail
-          width="200"
-        )
+        each item in products
 
-        h2= item.name
+            .col-lg-3.col-md-4.col-sm-6.mb-4
 
-        p Giá: #{item.priceOut} VNĐ
+                .card.h-100.shadow-sm.product-card
 
-        p RAM: #{item.specifications.ram.size} GB
+                    img.card-img-top.product-image(
+                        src=`/images/${item.thumbnail}`
+                        alt=item.name
+                    )
 
-        p CPU: #{item.specifications.cpu.model}
+                    .card-body.d-flex.flex-column
 
-        p VGA: #{item.specifications.gpu.model}
+                        h5.card-title.fw-bold
+                            = item.name
+
+                        p.text-muted.mb-2
+                            = item.manufacturer.name
+
+                        p.mb-1
+                            strong CPU:
+                            |  #{item.specifications.cpu.model}
+
+                        p.mb-1
+                            strong RAM:
+                            |  #{item.specifications.ram.size}GB
+
+                        p.mb-1
+                            strong GPU:
+                            |  #{item.specifications.gpu.model}
+
+                        p.mb-3
+                            strong SSD:
+                            |  #{item.specifications.storage.capacity}
+
+                        .mt-auto
+
+                            h4.text-danger.fw-bold
+                                = item.salePrice.toLocaleString("vi-VN")
+                                |  đ
+
+                            if item.priceOut != item.salePrice
+
+                                p.text-decoration-line-through.text-muted
+                                    = item.priceOut.toLocaleString("vi-VN")
+                                    |  đ
+
+                            a.btn.btn-dark.w-100(
+                                href=`/products/${item.slug}`
+                            )
+                                | Xem chi tiết
