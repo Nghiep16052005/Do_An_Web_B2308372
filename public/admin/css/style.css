@@ -1,0 +1,62 @@
+.header {
+  background-color: #212529; /* Màu nền tối */
+  color: #ffffff;            /* Chữ màu trắng */
+  padding: 15px 20px;
+  border-bottom: 1px solid #343a40;
+}
+
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Style cho sidebar */
+/* Khung chứa bao bọc toàn bộ phần thân dưới header */
+.body {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - 56px); /* Full màn hình trừ đi chiều cao của header */
+  background-color: #ffffff;
+}
+
+/* Định dạng cho thanh menu dọc (Sider) nằm sát góc trái */
+.sider {
+  width: 250px; /* Độ rộng của thanh menu */
+  background-color: #212529; /* Màu nền tối giống trong ảnh */
+  min-height: calc(100vh - 56px); /* Kéo dài nền tối xuống hết màn hình */
+  box-sizing: border-box;
+}
+
+/* Định dạng danh sách menu bên trong */
+.sider .inner-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sider .inner-menu ul li {
+  border-bottom: 1px solid #343a40; /* Đường gạch ngang phân chia các mục */
+}
+
+.sider .inner-menu ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: #ffffff; /* Màu chữ trắng */
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+/* Hiệu ứng khi di chuột qua menu */
+.sider .inner-menu ul li a:hover {
+  background-color: #343a40;
+}
+
+/* Khu vực hiển thị nội dung chính bên phải */
+.main {
+  flex: 1; /* Tự động chiếm trọn phần không gian còn lại bên phải */
+  padding: 30px;
+  box-sizing: border-box;
+}
