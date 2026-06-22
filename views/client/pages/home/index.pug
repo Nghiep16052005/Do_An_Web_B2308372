@@ -1,1 +1,47 @@
-h1 Trang chủ
+extends ../../layouts/default
+
+block content
+    .py-5.bg-white
+        .container
+            .row.align-items-center
+                .col-lg-6
+                    h1.display-5.fw-bold.mb-4 Laptop Store - Mua sắm laptop chuyên nghiệp
+                    p.lead.mb-4
+                        | Khám phá laptop chất lượng cho học tập, văn phòng và giải trí cùng dịch vụ tư vấn chu đáo.
+                    .d-grid.gap-2.d-md-flex.justify-content-md-start
+                        a.btn.btn-primary.btn-lg.me-md-3(href="/products") Xem sản phẩm
+                        a.btn.btn-outline-secondary.btn-lg(href="/account/login") Đăng nhập
+                .col-lg-6
+                    .ratio.ratio-16x9
+                        iframe(src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Giới thiệu Laptop Store" allowfullscreen)
+    .py-5
+        .container
+            .row.text-center.mb-4
+                .col
+                    h2.mb-3 Sản phẩm nổi bật
+                    p.text-muted Lựa chọn laptop từ những thương hiệu uy tín, cấu hình tối ưu cho mọi nhu cầu.
+            .row
+                each product in [{title:'Laptop văn phòng',desc:'Ổn định, hiệu năng mượt mà cho công việc hằng ngày.',badge:'Bán chạy'},{title:'Laptop gaming',desc:'Sức mạnh đồ họa cao, tản nhiệt tốt cho trò chơi.',badge:'Ưa thích'},{title:'Laptop học tập',desc:'Thiết kế nhẹ, pin lâu và giá hợp lý.' ,badge:'Tiết kiệm'}]
+                    .col-md-4.mb-4
+                        .card.h-100.shadow-sm
+                            .card-body
+                                span.badge.bg-primary.mb-3= product.badge
+                                h5.card-title= product.title
+                                p.card-text= product.desc
+                            .card-footer.bg-transparent.border-top-0
+                                a.btn.btn-sm.btn-outline-primary(href="/products") Xem chi tiết
+    .py-5.bg-light
+        .container
+            .row.g-4
+                .col-md-4
+                    .card.h-100.border-0.shadow-sm.p-4
+                        h5.card-title Tư vấn chuyên sâu
+                        p.card-text Chúng tôi hỗ trợ chọn laptop đúng nhu cầu và ngân sách.
+                .col-md-4
+                    .card.h-100.border-0.shadow-sm.p-4
+                        h5.card-title Thanh toán linh hoạt
+                        p.card-text Nhiều phương thức thanh toán và chính sách bảo hành rõ ràng.
+                .col-md-4
+                    .card.h-100.border-0.shadow-sm.p-4
+                        h5.card-title Giao hàng nhanh
+                        p.card-text Đơn hàng được xử lý nhanh chóng, giao tận nơi trong thời gian ngắn.

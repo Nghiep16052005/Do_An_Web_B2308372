@@ -1,5 +1,5 @@
-module.exports.dashboard = async (req, res) => {
+module.exports.index = async (req, res) => {
     res.render("admin/pages/dashboard/index", {
-        pageTitle: "Trang tổng quan",
+        pageTitle: "Trang sản phẩm",
     });
 }

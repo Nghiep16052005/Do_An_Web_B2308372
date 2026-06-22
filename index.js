@@ -1,12 +1,17 @@
 require("dotenv").config();
 
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const database = require("./config/database");
 const systemConfig = require("./config/system");
 database.connect();
 
+app.use(express.urlencoded({
+    extended: true
+})); 
+app.use(cookieParser());
 app.set("views", "./views");
 app.set("view engine", "pug");
 

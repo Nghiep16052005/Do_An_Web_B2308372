@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "start": "node index.js",
-  "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/Nghiep16052005/Nien_Luan_CS#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "md5": "^2.3.0",
     "mongoose": "^9.6.3",
     "pug": "^3.0.4"
   },
