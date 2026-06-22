@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const userMiddleware = require("./middlewares/client/user.middleware");
 const app = express();
 
 const database = require("./config/database");
@@ -12,6 +13,7 @@ app.use(express.urlencoded({
     extended: true
 })); 
 app.use(cookieParser());
+app.use(userMiddleware.infoUser);
 app.set("views", "./views");
 app.set("view engine", "pug");
 

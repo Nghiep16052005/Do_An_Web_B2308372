@@ -8,7 +8,8 @@ header.header
 
         ul.menu
             li
-                a(href="/") Trang Chủ
+                a(href="/")
+                    | Trang Chủ
 
             li
                 a(href="/products")
@@ -16,17 +17,33 @@ header.header
 
         .account
 
-            a.btn-login(
-                href="/account/login"
-            )
-                | Đăng Nhập
+            if(!user)
 
-            a.btn-register(
-                href="/account/register"
-            )
-                | Đăng Ký
+                .account-guest
 
-            a.btn-logout(
-                href="/account/logout"
-            )
-                | Đăng Xuất
+                    a.btn-login(
+                        href="/account/login"
+                    )
+                        | Đăng Nhập
+
+                    a.btn-register(
+                        href="/account/register"
+                    )
+                        | Đăng Ký
+
+            else
+
+                .account-user
+
+                    a.btn-cart(
+                        href="/cart"
+                    )
+                        | Giỏ Hàng
+
+                    span.user-name
+                        | Xin chào #{user.fullName}
+
+                    a.btn-logout(
+                        href="/account/logout"
+                    )
+                        | Đăng Xuất
