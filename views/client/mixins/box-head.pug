@@ -1,0 +1,10 @@
+mixin boxHead(title, subTitle)
+    .row.box-head.text-center.mb-5
+        .col
+            if title
+                h2.display-5.fw-bold.text-primary
+                    = title
+
+            if subTitle
+                p.text-secondary.mt-3
+                    = subTitle

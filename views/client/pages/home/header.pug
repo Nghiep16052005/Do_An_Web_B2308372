@@ -1,3 +1,4 @@
+include ../mixins/modal.pug
 header.header
 
     .container
@@ -43,7 +44,11 @@ header.header
                     span.user-name
                         | Xin chào #{user.fullName}
 
-                    a.btn-logout(
-                        href="/account/logout"
+                    a.btn-logout.btn.btn-danger(
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#logoutModal"
                     )
-                        | Đăng Xuất
+                        i.fa-solid.fa-right-from-bracket
+                        |  Đăng xuất  
++logoutModal()

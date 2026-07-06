@@ -1,0 +1,41 @@
+mixin logoutModal()
+
+    .modal.fade(
+        id="logoutModal"
+        tabindex="-1"
+        aria-hidden="true"
+    )
+
+        .modal-dialog.modal-dialog-centered
+
+            .modal-content
+
+                .modal-header
+
+                    h5.modal-title
+                        i.fa-solid.fa-right-from-bracket.me-2
+                        | Xác nhận đăng xuất
+
+                    button.btn-close(
+                        type="button"
+                        data-bs-dismiss="modal"
+                    )
+
+                .modal-body
+
+                    p.mb-0
+                        | Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?
+
+                .modal-footer
+
+                    button.btn.btn-secondary(
+                        type="button"
+                        data-bs-dismiss="modal"
+                    )
+                        | Hủy
+
+                    a.btn.btn-danger(
+                        href="/account/logout"
+                    )
+                        i.fa-solid.fa-right-from-bracket.me-2
+                        | Đăng xuất
