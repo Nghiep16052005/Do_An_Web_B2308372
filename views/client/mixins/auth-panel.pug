@@ -1,0 +1,10 @@
+mixin authPanel(title, subtitle)
+    .row.justify-content-center
+        .col-lg-6.col-xl-5
+            .card.border-0.shadow-lg.overflow-hidden.rounded-4
+                .bg-dark.text-white.p-4.text-center
+                    h2.h3.fw-bold.mb-2= title
+                    p.mb-0.text-white-50= subtitle
+                .card-body.p-4.p-lg-5
+                    if block
+                        block

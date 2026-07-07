@@ -1,87 +1,24 @@
 extends ../../layouts/default
 
+include ../../mixins/auth-panel
+
 block content
-
-    .container.py-5
-
-        .row.justify-content-center
-
-            .col-lg-6
-
-                .card.shadow-lg.border-0
-
-                    .card-header.bg-primary.text-white.text-center.py-3
-
-                        h2.mb-0
-                            | ĐĂNG KÝ TÀI KHOẢN
-
-                    .card-body.p-4
-
-                        form(
-                            action="/account/register"
-                            method="POST"
-                        )
-
-                            .mb-3
-
-                                label.form-label
-                                    | Họ và tên
-
-                                input.form-control(
-                                    type="text"
-                                    name="fullName"
-                                    placeholder="Nhập họ tên"
-                                    required
-                                )
-
-                            .mb-3
-
-                                label.form-label
-                                    | Email
-
-                                input.form-control(
-                                    type="email"
-                                    name="email"
-                                    placeholder="Nhập email"
-                                    required
-                                )
-
-                            .mb-3
-
-                                label.form-label
-                                    | Mật khẩu
-
-                                input.form-control(
-                                    type="password"
-                                    name="password"
-                                    placeholder="Nhập mật khẩu"
-                                    required
-                                )
-
-                            .mb-3
-
-                                label.form-label
-                                    | Xác nhận mật khẩu
-
-                                input.form-control(
-                                    type="password"
-                                    name="confirmPassword"
-                                    placeholder="Nhập lại mật khẩu"
-                                    required
-                                )
-
-                            button.btn.btn-primary.w-100.py-2(
-                                type="submit"
-                            )
-                                | Đăng Ký
-
-                        hr
-
-                        p.text-center.mb-0
-
-                            | Đã có tài khoản?
-
-                            a.ms-2(
-                                href="/account/login"
-                            )
-                                | Đăng nhập
+    +authPanel('Đăng ký tài khoản', 'Tạo tài khoản để bắt đầu trải nghiệm')
+        form(action="/account/register" method="POST")
+            .mb-3
+                label.form-label.fw-semibold(for="fullName") Họ và tên
+                input#fullName.form-control.form-control-lg(type="text" name="fullName" placeholder="Nhập họ tên" required)
+            .mb-3
+                label.form-label.fw-semibold(for="email") Email
+                input#email.form-control.form-control-lg(type="email" name="email" placeholder="Nhập email" required)
+            .mb-3
+                label.form-label.fw-semibold(for="password") Mật khẩu
+                input#password.form-control.form-control-lg(type="password" name="password" placeholder="Nhập mật khẩu" required)
+            .mb-3
+                label.form-label.fw-semibold(for="confirmPassword") Xác nhận mật khẩu
+                input#confirmPassword.form-control.form-control-lg(type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" required)
+            .d-grid.gap-2
+                button.btn.btn-dark.btn-lg(type="submit") Đăng ký
+            .text-center.mt-3
+                span.text-muted Đã có tài khoản?
+                a.ms-2.text-dark.fw-semibold(href="/account/login") Đăng nhập

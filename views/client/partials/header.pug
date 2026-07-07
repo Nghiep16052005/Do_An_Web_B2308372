@@ -1,51 +1,30 @@
-h3= user ? user.fullName : "CHƯA CÓ USER"
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+include ../mixins/modal
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-white.border-bottom.shadow-sm.sticky-top
     .container
-
-        a.navbar-brand(href="/")
-            | Laptop Store
-
-        button.navbar-toggler(
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        )
+        a.navbar-brand.fw-bold.text-dark.fs-4(href="/") Laptop Store
+        button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
             span.navbar-toggler-icon
 
         .collapse.navbar-collapse#navbarNav
-
             ul.navbar-nav.me-auto.mb-2.mb-lg-0
                 li.nav-item
-                    a.nav-link(href="/") Trang chủ
-
+                    a.nav-link.text-dark.fw-semibold(href="/") Trang chủ
                 li.nav-item
-                    a.nav-link(href="/products") Sản phẩm
+                    a.nav-link.text-dark.fw-semibold(href="/products") Sản phẩm
 
-            ul.navbar-nav.ms-auto.mb-2.mb-lg-0
-
+            ul.navbar-nav.ms-auto.mb-2.mb-lg-0.align-items-lg-center
                 if !user
-
                     li.nav-item
-                        a.nav-link(href="/account/login")
-                            | Đăng nhập
-
+                        a.btn.btn-outline-dark.me-2(href="/account/login") Đăng nhập
                     li.nav-item
-                        a.nav-link(href="/account/register")
-                            | Đăng ký
-
+                        a.btn.btn-dark(href="/account/register") Đăng ký
                 else
-
                     li.nav-item
-                        a.nav-link(href="/cart")
-                            | Giỏ hàng
-
+                        a.btn.btn-outline-dark.me-2(href="/cart") Giỏ hàng
                     li.nav-item
-                        span.nav-link
-                            | Xin chào #{user.fullName}
-
+                        span.nav-link.text-dark.fw-semibold Xin chào #{user.fullName}
                     li.nav-item
-                        a.nav-link(href="/account/logout")
-                            | Đăng xuất
+                        button.btn.btn-dark(type="button" data-bs-toggle="modal" data-bs-target="#logoutModal") Đăng xuất
+
++logoutModal

@@ -1,218 +1,40 @@
-body{
-    background: #f5f5f5;
+body {
+    background: #f7f7f5;
+    color: #111111;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* CARD */
-
-.product-card{
-    border: none;
-    border-radius: 14px;
-    overflow: hidden;
-    transition: 0.3s;
-    background: #fff;
+.container {
+    max-width: 1200px;
 }
 
-.product-card:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+.hero-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f1ee 100%);
+    border: 1px solid #ecece8;
 }
 
-/* IMAGE */
-
-.product-image{
-    position: relative;
-    overflow: hidden;
-    padding: 15px;
-    background: #fff;
+.product-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.product-image img{
-    width: 100%;
-    height: 220px;
-    object-fit: contain;
-    transition: 0.3s;
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(17, 17, 17, 0.12) !important;
 }
 
-.product-card:hover img{
-    transform: scale(1.05);
+.btn-dark:hover {
+    background-color: #000000 !important;
 }
 
-/* DISCOUNT */
-
-.discount-badge{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: red;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
+.navbar-brand {
+    letter-spacing: 0.04em;
 }
 
-/* TITLE */
-
-.product-title{
-    font-size: 15px;
-    font-weight: 600;
-    min-height: 45px;
-    line-height: 1.4;
+.card {
+    border-radius: 1.25rem;
 }
 
-/* SPECS */
-
-.specs p{
-    margin-bottom: 4px;
-    font-size: 13px;
-    color: #555;
-}
-
-/* PRICE */
-
-.sale-price{
-    color: red;
-    font-weight: 700;
-}
-
-.old-price{
-    text-decoration: line-through;
-    color: gray;
-    font-size: 14px;
-}
-
-.discount-text{
-    color: red;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* BUTTON */
-
-.btn-buy{
-    background: #0d6efd;
-    color: white;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.btn-buy:hover{
-    background: #0b5ed7;
-    color: white;
-} 
-
-/* Header */
-
-.header{
-    background:#111827;
-    padding:15px 0;
-}
-
-.header .container{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-/* Logo */
-
-.logo a{
-    color:#fff;
-    text-decoration:none;
-    font-size:28px;
-    font-weight:700;
-}
-
-/* Menu */
-
-.menu{
-    display:flex;
-    gap:30px;
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-.menu a{
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:500;
-}
-
-.menu a:hover{
-    color:#3b82f6;
-}
-
-/* Khu vực tài khoản */
-
-.account{
-    display:flex;
-    align-items:center;
-}
-
-/* Chưa đăng nhập */
-
-.account-guest{
-    display:flex;
-    gap:10px;
-}
-
-.btn-login{
-    background:#2563eb;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.btn-register{
-    background:#10b981;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* Đã đăng nhập */
-
-.account-user{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.btn-cart{
-    background:#f59e0b;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.user-name{
-    color:white;
-    font-weight:600;
-}
-
-.btn-logout{
-    background:#ef4444;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* Hover */
-
-.btn-login:hover,
-.btn-register:hover,
-.btn-cart:hover,
-.btn-logout:hover{
-    opacity:0.9;
+.form-control:focus {
+    border-color: #111111;
+    box-shadow: 0 0 0 0.2rem rgba(17, 17, 17, 0.15);
 }

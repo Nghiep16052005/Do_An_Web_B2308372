@@ -6,6 +6,8 @@ const router = express.Router();
 const controller = require("../../controllers/client/products.controllers");
 
 // /products
-router.get("/", controller.index);
+router.get("/", controller.index); 
+// Chi tiết sản phẩm theo slug
+router.get("/:slug", controller.detail);
 // cho phép các file khác sử dụng router này
 module.exports = router; 
