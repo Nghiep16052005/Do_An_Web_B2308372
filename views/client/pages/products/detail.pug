@@ -1,0 +1,30 @@
+extends ../../layouts/default
+
+include ../../mixins/product/breadcrumb
+include ../../mixins/product/gallery
+include ../../mixins/product/info
+include ../../mixins/product/action
+include ../../mixins/product/tabs
+include ../../mixins/product/specification
+
+block content
+
+    .container.py-4
+
+        +productBreadcrumb(product)
+
+        .row.g-5.mt-3
+
+            .col-lg-5
+
+                +productGallery(product)
+
+            .col-lg-7
+
+                +productInfo(product)
+
+                +productAction(product)
+
+        +productTabs(product)
+
+        +productSpecification(product)

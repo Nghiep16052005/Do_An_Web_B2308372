@@ -1,0 +1,87 @@
+mixin productSpecification(product)
+
+    .card.shadow-sm.border-0.mt-5
+
+        .card-header.bg-dark.text-white
+
+            h4.mb-0
+                i.fa-solid.fa-microchip.me-2
+                | Thông số kỹ thuật
+
+        .card-body.p-0
+
+            table.table.table-striped.table-hover.mb-0
+
+                tbody
+
+                    tr
+                        th(style="width:30%") Hãng
+                        td= product.manufacturer.name
+
+                    tr
+                        th Danh mục
+                        td= product.category
+
+                    tr
+                        th CPU
+                        td
+                            = product.specifications.cpu.brand
+                            |  
+                            = product.specifications.cpu.model
+
+                    tr
+                        th RAM
+                        td
+                            = product.specifications.ram.size
+                            | GB 
+                            = product.specifications.ram.type_
+
+                    tr
+                        th Card đồ họa
+                        td
+                            = product.specifications.gpu.brand
+                            |  
+                            = product.specifications.gpu.model
+
+                    tr
+                        th Ổ cứng
+                        td
+                            = product.specifications.storage.capacity
+                            |  
+                            = product.specifications.storage.type_
+
+                    tr
+                        th Màn hình
+                        td
+                            = product.specifications.display.size
+
+                    tr
+                        th Tần số quét
+                        td= product.specifications.display.refreshRate
+
+                    tr
+                        th Hệ điều hành
+                        td= product.specifications.os
+
+                    tr
+                        th Tồn kho
+                        td= product.stock
+
+                    tr
+                        th Đã bán
+                        td= product.sold
+
+                    tr
+                        th Trạng thái
+
+                        td
+
+                            if product.status == "active"
+
+                                span.badge.bg-success
+                                    | Đang kinh doanh
+
+                            else
+
+                                span.badge.bg-danger
+                                    | Ngừng kinh doanh

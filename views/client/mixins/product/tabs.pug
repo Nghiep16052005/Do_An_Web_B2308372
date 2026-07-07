@@ -1,0 +1,42 @@
+mixin productTabs(product)
+
+    ul.nav.nav-tabs.mt-5(role="tablist")
+
+        li.nav-item
+            button.nav-link.active(
+                data-bs-toggle="tab"
+                data-bs-target="#description"
+                type="button"
+            )
+                | Mô tả
+
+        li.nav-item
+            button.nav-link(
+                data-bs-toggle="tab"
+                data-bs-target="#review"
+                type="button"
+            )
+                | Đánh giá
+
+    .tab-content.border.border-top-0.p-4.bg-white
+
+        .tab-pane.fade.show.active#description
+
+            h5.fw-bold.mb-3 Mô tả sản phẩm
+
+            p= product.description
+
+        .tab-pane.fade#review
+
+            h5.fw-bold.mb-3 Đánh giá
+
+            p
+                strong Điểm đánh giá:
+                |  
+                = product.ratingAverage
+                | /5
+
+            p
+                strong Số lượt đánh giá:
+                |  
+                = product.reviewCount

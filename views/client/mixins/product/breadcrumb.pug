@@ -1,0 +1,30 @@
+mixin productBreadcrumb(product)
+
+    nav(
+        style="--bs-breadcrumb-divider:'>';"
+        aria-label="breadcrumb"
+    )
+
+        ol.breadcrumb.mb-4
+
+            li.breadcrumb-item
+
+                a(
+                    href="/"
+                    class="text-decoration-none"
+                )
+                    | Trang chủ
+
+            li.breadcrumb-item
+
+                a(
+                    href="/products"
+                    class="text-decoration-none"
+                )
+                    | Sản phẩm
+
+            li.breadcrumb-item.active(
+                aria-current="page"
+            )
+
+                = product.name

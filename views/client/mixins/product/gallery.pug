@@ -1,0 +1,24 @@
+mixin productGallery(product)
+
+    .card.border-0.shadow-sm
+
+        .card-body
+
+            img.img-fluid.rounded.w-100.border(
+                src=`/images/${product.thumbnail}`
+                alt=product.name
+            )
+
+            if product.images && product.images.length > 0
+
+                .row.g-2.mt-3
+
+                    each image in product.images
+
+                        .col-3
+
+                            img.img-thumbnail.w-100(
+                                src=`/images/${image}`
+                                alt=product.name
+                                style="cursor:pointer;"
+                            )
