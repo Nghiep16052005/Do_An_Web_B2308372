@@ -1,0 +1,38 @@
+mixin loginRequiredModal()
+
+    .modal.fade(
+        id="loginRequiredModal"
+        tabindex="-1"
+        aria-hidden="true"
+    )
+
+        .modal-dialog
+
+            .modal-content
+
+                .modal-header
+
+                    h5.modal-title
+                        | Thông báo
+
+                    button.btn-close(
+                        type="button"
+                        data-bs-dismiss="modal"
+                    )
+
+                .modal-body
+
+                    p.mb-0
+                        | Bạn cần đăng nhập hoặc đăng ký để thêm sản phẩm vào giỏ hàng.
+
+                .modal-footer
+
+                    a.btn.btn-outline-dark(
+                        href="/account/register"
+                    )
+                        | Đăng ký
+
+                    a.btn.btn-dark(
+                        href="/account/login"
+                    )
+                        | Đăng nhập

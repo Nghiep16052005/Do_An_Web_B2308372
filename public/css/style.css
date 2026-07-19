@@ -38,3 +38,17 @@ body {
     border-color: #111111;
     box-shadow: 0 0 0 0.2rem rgba(17, 17, 17, 0.15);
 }
+
+.cart-page .cart-card {
+    border: 1px solid #ecece8;
+    background: #ffffff;
+}
+
+.cart-page .cart-summary {
+    border: 1px solid #ecece8;
+    background: linear-gradient(135deg, #ffffff 0%, #faf9f6 100%);
+}
+
+.cart-page .empty-cart {
+    background: linear-gradient(135deg, #ffffff 0%, #f6f6f3 100%);
+}

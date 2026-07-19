@@ -1,12 +1,12 @@
 extends ../../layouts/default
-
+include ../../mixins/modal/login-required-modal
 include ../../mixins/product/breadcrumb
 include ../../mixins/product/gallery
 include ../../mixins/product/info
 include ../../mixins/product/action
 include ../../mixins/product/tabs
 include ../../mixins/product/specification
-
+include ../../mixins/product/login-modal
 block content
 
     .container.py-4
@@ -27,4 +27,6 @@ block content
 
         +productTabs(product)
 
-        +productSpecification(product)
+        +productSpecification(product) 
+        +loginRequiredModal() 
+        +loginRequiredModal()

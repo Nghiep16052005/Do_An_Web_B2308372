@@ -1,5 +1,4 @@
-include ../mixins/modal
-
+include ../mixins/modal/logout-modal
 nav.navbar.navbar-expand-lg.navbar-light.bg-white.border-bottom.shadow-sm.sticky-top
     .container
         a.navbar-brand.fw-bold.text-dark.fs-4(href="/") Laptop Store
@@ -27,4 +26,4 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white.border-bottom.shadow-sm.sticky
                     li.nav-item
                         button.btn.btn-dark(type="button" data-bs-toggle="modal" data-bs-target="#logoutModal") Đăng xuất
 
-+logoutModal
++logoutModal()

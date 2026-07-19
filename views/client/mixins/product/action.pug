@@ -4,13 +4,32 @@ mixin productAction(product)
 
         .col-md-6
 
-            a.btn.btn-dark.w-100.py-3(
-                href="#"
-            )
+            if user
 
-                i.fa-solid.fa-cart-shopping.me-2
+                form(
+                    action=`/cart/add/${product._id}`
+                    method="POST"
+                )
 
-                | Thêm vào giỏ
+                    button.btn.btn-dark.w-100.py-3(
+                        type="submit"
+                    )
+
+                            i.fa-solid.fa-cart-shopping.me-2
+
+                            | Thêm vào giỏ
+
+            else
+
+                button.btn.btn-dark.w-100.py-3(
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginRequiredModal"
+                )
+
+                    i.fa-solid.fa-cart-shopping.me-2
+
+                    | Thêm vào giỏ
 
         .col-md-6
 

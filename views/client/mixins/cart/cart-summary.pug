@@ -1,0 +1,44 @@
+mixin cartSummary(cart)
+
+    .card.shadow-sm.border-0.sticky-top.cart-summary
+
+        .card-body.p-4
+
+            h5.fw-bold.mb-4 Tóm tắt đơn hàng
+
+            .d-flex.justify-content-between.mb-3
+
+                span.text-secondary
+                    | Tạm tính
+
+                strong.text-dark
+                    | 20.990.000đ
+
+            .d-flex.justify-content-between.mb-3
+
+                span.text-secondary
+                    | Phí vận chuyển
+
+                strong.text-success
+                    | Miễn phí
+
+            hr
+
+            .d-flex.justify-content-between.align-items-center.mb-4
+
+                h5.mb-0
+                    | Tổng cộng
+
+                h4.mb-0.text-danger
+
+                    | 20.990.000đ
+
+            .d-grid
+
+                a.btn.btn-dark.btn-lg.rounded-pill(
+                    href="/checkout"
+                )
+
+                    i.fa-solid.fa-credit-card.me-2
+
+                    | Thanh toán

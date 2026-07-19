@@ -6,14 +6,13 @@ mixin logoutModal()
         aria-hidden="true"
     )
 
-        .modal-dialog.modal-dialog-centered
+        .modal-dialog
 
             .modal-content
 
                 .modal-header
 
                     h5.modal-title
-                        i.fa-solid.fa-right-from-bracket.me-2
                         | Xác nhận đăng xuất
 
                     button.btn-close(
@@ -24,7 +23,7 @@ mixin logoutModal()
                 .modal-body
 
                     p.mb-0
-                        | Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?
+                        | Bạn có chắc chắn muốn đăng xuất không?
 
                 .modal-footer
 
@@ -37,5 +36,4 @@ mixin logoutModal()
                     a.btn.btn-danger(
                         href="/account/logout"
                     )
-                        i.fa-solid.fa-right-from-bracket.me-2
                         | Đăng xuất

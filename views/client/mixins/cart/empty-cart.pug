@@ -1,0 +1,21 @@
+mixin emptyCart()
+
+    .card.border-0.shadow-sm.rounded-4.text-center.py-5.px-4.empty-cart
+
+        .mb-4
+            i.fa-solid.fa-cart-shopping.fa-3x.text-secondary
+
+        h3.fw-bold.mb-3
+            | Giỏ hàng đang trống
+
+        p.text-muted.mb-4
+
+            | Bạn chưa thêm sản phẩm nào vào giỏ hàng.
+
+        a.btn.btn-dark.rounded-pill.px-4(
+            href="/products"
+        )
+
+            i.fa-solid.fa-laptop.me-2
+
+            | Tiếp tục mua sắm
