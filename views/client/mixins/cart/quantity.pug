@@ -1,0 +1,25 @@
+mixin quantity(item)
+
+    .input-group.input-group-sm(
+        style="width:120px"
+    )
+
+        button.btn.btn-outline-secondary.btn-minus(
+            type="button"
+            data-product-id=item.product_id
+        )
+            | -
+
+        input.form-control.text-center.quantity-input(
+            type="number"
+            min="1"
+            value=item.quantity
+            data-product-id=item.product_id
+            data-stock=item.product.stock
+        )
+
+        button.btn.btn-outline-secondary.btn-plus(
+            type="button"
+            data-product-id=item.product_id
+        )
+            | +

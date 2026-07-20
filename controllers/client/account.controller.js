@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const randomString = require("randomstring");
 const User = require("../../models/user.model");
 const md5 = require("md5"); 
-
+const Cart = require("../../models/cart.model");
 // form dang ki 
 module.exports.register = (req, res) => {
 
@@ -69,8 +69,11 @@ module.exports.registerPost = async (req, res) => {
     await user.save();
         res.cookie(
         "tokenUser",
-        token
-    );
+        user.token
+    ); 
+controllers/client/account.controller.js
+    console.log("Cookie cart:", req.cookies.cart);
+
     res.redirect("/");
 }
 
@@ -102,15 +105,98 @@ module.exports.loginPost = async (req, res) => {
         return res.send("Sai mật khẩu");
     }
 
+ // Lưu cookie đăng nhập
     res.cookie(
         "tokenUser",
         user.token
     );
 
+    //=====================================
+    // Merge Cookie -> MongoDB
+    //=====================================
+
+    const cookieCart = req.cookies.cart || [];
+
+    if(cookieCart.length > 0){
+
+        //---------------------------------
+        // Tìm cart của user
+        //---------------------------------
+
+        let cart = await Cart.findOne({
+
+            user_id: user._id.toString()
+
+        });
+
+        //---------------------------------
+        // Nếu chưa có cart
+        //---------------------------------
+
+        if(!cart){
+
+            cart = new Cart({
+
+                user_id: user._id.toString(),
+
+                products: []
+
+            });
+
+        }
+
+        //---------------------------------
+        // Duyệt Cookie
+        //---------------------------------
+
+        for(const item of cookieCart){
+
+            const existProduct = cart.products.find(product =>
+
+                product.product_id == item.product_id
+
+            );
+
+            //------------------------------
+            // Đã có sản phẩm
+            //------------------------------
+
+            if(existProduct){
+
+                existProduct.quantity += item.quantity;
+
+            }
+
+            //------------------------------
+            // Chưa có
+            //------------------------------
+
+            else{
+
+                cart.products.push({
+
+                    product_id: item.product_id,
+
+                    quantity: item.quantity
+
+                });
+
+            }
+
+        }
+
+        await cart.save();
+
+        //---------------------------------
+        // Xóa Cookie sau khi Merge
+        //---------------------------------
+
+        res.clearCookie("cart");
+
+    }
+
     res.redirect("/");
-
 }
-
 // dang xuat 
 module.exports.logout = (req, res) => {
     console.log("Đã vào logout");

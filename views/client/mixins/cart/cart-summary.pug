@@ -12,7 +12,7 @@ mixin cartSummary(cart)
                     | Tạm tính
 
                 strong.text-dark
-                    | 20.990.000đ
+                    = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"
 
             .d-flex.justify-content-between.mb-3
 
@@ -30,9 +30,8 @@ mixin cartSummary(cart)
                     | Tổng cộng
 
                 h4.mb-0.text-danger
-
-                    | 20.990.000đ
-
+                    = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"  
+                    
             .d-grid
 
                 a.btn.btn-dark.btn-lg.rounded-pill(
