@@ -4,27 +4,13 @@ mixin productAction(product)
 
         .col-md-6
 
-            if user
-
-                form(
-                    action=`/cart/add/${product._id}`
-                    method="POST"
-                )
-
-                    button.btn.btn-dark.w-100.py-3(
-                        type="submit"
-                    )
-
-                            i.fa-solid.fa-cart-shopping.me-2
-
-                            | Thêm vào giỏ
-
-            else
+            form(
+                action=`/cart/add/${product._id}`
+                method="POST"
+            )
 
                 button.btn.btn-dark.w-100.py-3(
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginRequiredModal"
+                    type="submit"
                 )
 
                     i.fa-solid.fa-cart-shopping.me-2
