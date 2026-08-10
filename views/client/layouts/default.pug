@@ -35,7 +35,16 @@ html(lang="vi")
             document.addEventListener('DOMContentLoaded', () => {
                 const slides = Array.from(document.querySelectorAll('.hero-slide'));
                 const dots = Array.from(document.querySelectorAll('.hero-dots button'));
+                const heroSlider = document.querySelector('.hero-slider');
                 let current = 0;
+
+                function updateSliderHeight() {
+                    if (!heroSlider) return;
+                    const activeSlide = heroSlider.querySelector('.hero-slide.active');
+                    if (activeSlide) {
+                        heroSlider.style.height = `${activeSlide.offsetHeight}px`;
+                    }
+                }
 
                 function showSlide(index) {
                     slides.forEach((slide, i) => {
@@ -44,6 +53,7 @@ html(lang="vi")
                     dots.forEach((dot, i) => {
                         dot.classList.toggle('active', i === index);
                     });
+                    updateSliderHeight();
                 }
 
                 dots.forEach((dot) => {
@@ -53,9 +63,26 @@ html(lang="vi")
                     });
                 });
 
+                showSlide(current);
+
                 setInterval(() => {
                     current = (current + 1) % slides.length;
                     showSlide(current);
                 }, 5000);
+
+                const thumbnails = Array.from(document.querySelectorAll('.product-gallery-thumb'));
+                const mainImage = document.querySelector('.product-gallery-main');
+
+                if (thumbnails.length && mainImage) {
+                    thumbnails.forEach((thumb) => {
+                        thumb.addEventListener('click', () => {
+                            thumbnails.forEach((item) => item.classList.remove('active'));
+                            thumb.classList.add('active');
+                            mainImage.src = thumb.dataset.src;
+                        });
+                    });
+                }
             });
+        // js xu li gio hang 
+        script(src="/js/cart.js")
         block script

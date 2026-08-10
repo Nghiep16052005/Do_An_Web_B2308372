@@ -3,14 +3,14 @@ mixin productInfo(product)
     .detail-panel
         h2.fw-bold.mb-3= product.name
 
-        .mb-3
-            span.badge.bg-light.text-dark.me-2= product.manufacturer.name
-            span.badge.bg-secondary= product.category
+        .mb-3.d-flex.flex-wrap.align-items-center.g-2
+            span.badge.bg-warning.text-dark.rounded-pill.px-3.py-2.fw-bold= product.manufacturer.name
+            span.badge.bg-light.text-dark.rounded-pill.px-3.py-2.fw-semibold= product.category
 
-        hr.border-secondary
+        hr.border-dark
 
         .mb-3
-            span.text-decoration-line-through.text-white-50.fs-5
+            span.text-decoration-line-through.text-dark.fs-5
                 = product.priceOut.toLocaleString()
                 |  đ
             br

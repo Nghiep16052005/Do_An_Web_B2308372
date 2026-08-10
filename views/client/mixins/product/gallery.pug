@@ -4,7 +4,7 @@ mixin productGallery(product)
 
         .card-body.p-3
 
-            img.img-fluid.rounded.w-100(
+            img.img-fluid.rounded.w-100.product-gallery-main(
                 src=`/images/${product.thumbnail}`
                 alt=product.name
                 style="height: 420px; object-fit: cover;"
@@ -14,12 +14,13 @@ mixin productGallery(product)
 
                 .row.g-2.mt-3
 
-                    each image in product.images
+                    each image, index in product.images
 
                         .col-3
 
-                            img.img-thumbnail.w-100(
+                            img.img-thumbnail.w-100.product-gallery-thumb(class=index === 0 ? 'active' : '')(
                                 src=`/images/${image}`
+                                data-src=`/images/${image}`
                                 alt=product.name
-                                style="cursor:pointer; height: 90px; object-fit: cover; background:#0d0d0d; border-color:rgba(255,255,255,0.16);"
+                                style="cursor:pointer; height: 90px; object-fit: cover;"
                             )

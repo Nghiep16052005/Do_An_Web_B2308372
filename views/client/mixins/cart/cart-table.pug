@@ -22,13 +22,13 @@ mixin cartTable(cart)
 
                     +cartCount(cart)
 
-                    p.text-white-50.mb-0
+                    p.text-dark.mb-0
                         | Chúng tôi luôn giữ hàng đúng sản phẩm bạn mong muốn.
 
                 .cart-card__summary-pill
-                    .fw-semibold.text-white
+                    .fw-semibold.text-dark
                         | Giao hàng nhanh
-                    .small.text-white-50
+                    .small.text-dark
                         | Từ 2-4 giờ nội thành
 
             .table-responsive
@@ -38,11 +38,11 @@ mixin cartTable(cart)
                     thead
 
                         tr
-                            th.text-white-50.small.text-uppercase(style="width:90px") Ảnh
-                            th.text-white-50.small.text-uppercase Sản phẩm
-                            th.text-white-50.small.text-uppercase Giá
-                            th.text-white-50.small.text-uppercase Số lượng
-                            th.text-white-50.small.text-uppercase Thành tiền
+                            th.text-dark.small.text-uppercase(style="width:90px") Ảnh
+                            th.text-dark.small.text-uppercase Sản phẩm
+                            th.text-dark.small.text-uppercase Giá
+                            th.text-dark.small.text-uppercase Số lượng
+                            th.text-dark.small.text-uppercase Thành tiền
                             th
 
                     tbody
@@ -61,20 +61,20 @@ mixin cartTable(cart)
                                         )
 
                                 td
-                                    strong.d-block.mb-1.text-white
+                                    strong.d-block.mb-1.text-dark
                                         = item.product.name
 
-                                    span.text-white-50.small
+                                    span.text-dark.small
                                         | Màu đen • Bảo hành 24 tháng
 
                                 td.text-danger.fw-semibold
                                     = item.salePrice.toLocaleString()
                                     | đ
 
-                                td
+                                td.text-dark
                                     +quantity(item)
 
-                                td.fw-bold.text-white
+                                td.fw-bold.text-danger
                                     = item.totalPrice.toLocaleString()
                                     | đ
 

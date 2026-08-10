@@ -15,6 +15,14 @@ router.get(
     controller.index
 );
 
+// ==============================
+// Lấy số lượng sản phẩm trong giỏ
+// ==============================
+
+router.get(
+    "/count",
+    controller.count
+);
 
 // ==============================
 // Thêm sản phẩm vào giỏ hàng

@@ -26,39 +26,37 @@ block content
 
                     .card-body.d-flex.flex-column
 
-                        span.badge.bg-light.text-dark.rounded-pill.mb-3= item.manufacturer.name
+                        span.badge.bg-light.text-dark.rounded-pill.mb-3.fs-7= item.manufacturer.name
 
-                        h5.card-title.fw-bold
+                        h5.card-title.fw-bold.fs-5.mb-2
                             = item.name
 
-                        p.text-muted.mb-2
+                        p.text-dark.mb-2.fw-semibold
                             = item.category
 
-                        p.mb-1
+                        p.mb-1.text-dark
                             strong CPU:
                             |  #{item.specifications.cpu.model}
 
-                        p.mb-1
+                        p.mb-1.text-dark
                             strong RAM:
                             |  #{item.specifications.ram.size}GB
 
-                        p.mb-3
+                        p.mb-3.text-dark
                             strong SSD:
                             |  #{item.specifications.storage.capacity}
 
                         .mt-auto
 
-                            h4.fw-bold.text-white
+                            h4.fw-bold.text-danger
                                 = item.salePrice.toLocaleString("vi-VN")
                                 |  đ
 
                             if item.priceOut != item.salePrice
 
-                                p.text-decoration-line-through.text-muted
+                                p.text-decoration-line-through.text-dark.mb-3
                                     = item.priceOut.toLocaleString("vi-VN")
                                     |  đ
 
-                            a.btn.btn-outline-light.w-100.mt-3(
-                                href=`/products/${item.slug}`
-                            )
+                            a.btn.btn-outline-dark.w-100.mt-3.text-dark(href=`/products/${item.slug}`)
                                 | Xem chi tiết

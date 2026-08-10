@@ -11,32 +11,30 @@ mixin cartSummary(cart)
                 span.badge.bg-white.text-dark.rounded-pill.px-3.py-2
                     | Miễn phí ship
 
-            h5.fw-bold.mb-4.text-white Tóm tắt đơn hàng
+            h5.fw-bold.mb-4.text-dark Tóm tắt đơn hàng
 
             .d-flex.justify-content-between.mb-3
 
-                span.text-white-50
-                    | Tạm tính
+                span.text-dark.fw-semibold Tạm tính
 
-                strong.text-white
+                strong.text-dark.fw-bold
                     = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"
 
             .d-flex.justify-content-between.mb-3
 
-                span.text-white-50
-                    | Phí vận chuyển
+                span.text-dark.fw-semibold Phí vận chuyển
 
-                strong.text-success
+                strong.text-dark.fw-bold
                     | Miễn phí
 
             hr.border-secondary
 
             .d-flex.justify-content-between.align-items-center.mb-4
 
-                h5.mb-0.text-white
+                h5.mb-0.text-dark
                     | Tổng cộng
 
-                h4.mb-0.text-danger
+                h4.mb-0.text-danger.fw-bold
                     = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"
 
             .d-grid

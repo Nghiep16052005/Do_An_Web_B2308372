@@ -4,10 +4,9 @@ mixin productAction(product)
 
         .col-md-6
 
-            form(
+            form.add-to-cart-form(
                 action=`/cart/add/${product._id}`
                 method="POST"
-                class="add-to-cart-form"
             )
 
                 button.btn.btn-light.text-dark.w-100.py-3(

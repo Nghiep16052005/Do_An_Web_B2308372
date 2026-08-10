@@ -1,9 +1,10 @@
 include ../mixins/modal/logout-modal
 nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
     .container
-        a.navbar-brand.fw-bold.fs-4(href="/")
-            i.fa-solid.fa-laptop.me-2
-            | Laptop Store
+        a.navbar-brand.fw-bold.fs-4.brand-sticker(href="/")
+            span.d-inline-flex.align-items-center.px-3.py-2.rounded-pill.bg-warning.text-dark
+                i.fa-solid.fa-laptop.me-2
+                | Laptop Store
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
             span.navbar-toggler-icon
 
@@ -25,7 +26,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
                         a.btn.btn-outline-light.me-2.position-relative(href="/cart")
                             i.fa-solid.fa-cart-shopping.me-2
                             | Giỏ hàng
-                            span#header-cart-count.badge.bg-light.text-dark.ms-2= cartCount
+                            span#header-cart-count.badge.bg-light.text-dark.ms-2
+                                | 0
                     li.nav-item
                         span.nav-link.fw-semibold.user-pill
                             i.fa-solid.fa-user-circle.me-2

@@ -413,4 +413,68 @@ module.exports.delete = async (req, res) => {
         type: "mongodb"
     });
 
+}; 
+
+// [GET] /cart/count
+module.exports.count = async (req, res) => {
+
+    let total = 0;
+
+    // ================================
+    // CHƯA ĐĂNG NHẬP -> COOKIE
+    // ================================
+
+    if (!req.cookies.tokenUser) {
+
+        const cart = req.cookies.cart || [];
+
+        total = cart.reduce(
+            (sum, item) => sum + Number(item.quantity || 0),
+            0
+        );
+
+        return res.json({
+            success: true,
+            count: total
+        });
+    }
+
+    // ================================
+    // ĐÃ ĐĂNG NHẬP -> MONGODB
+    // ================================
+
+    const user = await User.findOne({
+        token: req.cookies.tokenUser,
+        deleted: false
+    });
+
+    if (!user) {
+
+        return res.status(401).json({
+            success: false,
+            count: 0
+        });
+    }
+
+    const cart = await Cart.findOne({
+        user_id: user._id.toString()
+    });
+
+    if (!cart) {
+
+        return res.json({
+            success: true,
+            count: 0
+        });
+    }
+
+    total = cart.products.reduce(
+        (sum, item) => sum + Number(item.quantity || 0),
+        0
+    );
+
+    return res.json({
+        success: true,
+        count: total
+    });
 };

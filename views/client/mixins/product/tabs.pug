@@ -4,7 +4,7 @@ mixin productTabs(product)
         ul.nav.nav-tabs.border-0.p-3.pb-0(role="tablist")
 
             li.nav-item
-                button.nav-link.active.text-white(
+                button.nav-link.active.text-dark.bg-light.fw-bold(
                     data-bs-toggle="tab"
                     data-bs-target="#description"
                     type="button"
@@ -12,7 +12,7 @@ mixin productTabs(product)
                     | Mô tả
 
             li.nav-item
-                button.nav-link.text-white(
+                button.nav-link.text-dark.bg-light.fw-bold(
                     data-bs-toggle="tab"
                     data-bs-target="#review"
                     type="button"
@@ -23,21 +23,27 @@ mixin productTabs(product)
 
             .tab-pane.fade.show.active#description
 
-                h5.fw-bold.mb-3 Mô tả sản phẩm
+                h5.fw-bold.mb-3.text-dark Mô tả sản phẩm
 
-                p.text-white-50= product.description
+                p.text-dark= product.description
 
             .tab-pane.fade#review
 
-                h5.fw-bold.mb-3 Đánh giá
+                h5.fw-bold.mb-3.text-dark Đánh giá
 
-                p.text-white-50
-                    strong Điểm đánh giá:
+                .review-summary.mb-3
+                    p.mb-1.fw-semibold.text-dark
+                        | Laptop gaming MSI mạnh mẽ, sẵn sàng chinh phục mọi tựa game hiện nay với cấu hình tối ưu và hiệu năng bền bỉ.
+                    p.mb-1.text-dark
+                        | Tập trung vào tốc độ, tản nhiệt ổn định và trải nghiệm chơi game mượt mà trong mọi điều kiện.
+
+                p.text-dark.mb-2
+                    strong.text-dark Điểm đánh giá:
                     |  
                     = product.ratingAverage
                     | /5
 
-                p.text-white-50
-                    strong Số lượt đánh giá:
+                p.text-dark
+                    strong.text-dark Số lượt đánh giá:
                     |  
                     = product.reviewCount
