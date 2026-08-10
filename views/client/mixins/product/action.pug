@@ -1,16 +1,18 @@
 mixin productAction(product)
 
-    .row.g-3.mt-2
+    .row.g-3.mt-3
 
         .col-md-6
 
             form(
                 action=`/cart/add/${product._id}`
                 method="POST"
+                class="add-to-cart-form"
             )
 
-                button.btn.btn-dark.w-100.py-3(
+                button.btn.btn-light.text-dark.w-100.py-3(
                     type="submit"
+                    data-product-id=product._id
                 )
 
                     i.fa-solid.fa-cart-shopping.me-2
@@ -19,7 +21,7 @@ mixin productAction(product)
 
         .col-md-6
 
-            a.btn.btn-outline-dark.w-100.py-3(
+            a.btn.btn-outline-light.w-100.py-3(
                 href="#"
             )
 

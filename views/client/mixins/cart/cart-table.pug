@@ -4,21 +4,32 @@ include cart-count.pug
 
 mixin cartTable(cart)
 
-    .card.shadow-sm.border-0.cart-card
+    .card.cart-card.shadow-lg
 
         .card-body.p-4
 
-            .d-flex.flex-column.flex-md-row.justify-content-between.align-items-md-center.gap-2.mb-4
+            .cart-card__header.d-flex.flex-column.flex-md-row.justify-content-between.align-items-md-center.gap-3.mb-4
 
                 div
 
+                    .d-flex.align-items-center.gap-2.mb-2
+                        span.cart-chip
+                            i.fa-solid.fa-basket-shopping.me-2
+                            | Sản phẩm trong giỏ
+                        span.badge.bg-light.text-dark.rounded-pill.px-3.py-2
+                            i.fa-solid.fa-shield-halved.me-2
+                            | Bảo hành uy tín
+
                     +cartCount(cart)
 
-                    p.text-secondary.mb-0 Chúng tôi luôn giữ hàng đúng sản phẩm bạn mong muốn.
+                    p.text-white-50.mb-0
+                        | Chúng tôi luôn giữ hàng đúng sản phẩm bạn mong muốn.
 
-                span.badge.bg-dark.rounded-pill.px-3.py-2
-                    i.fa-solid.fa-check.me-2
-                    | Đã xác nhận
+                .cart-card__summary-pill
+                    .fw-semibold.text-white
+                        | Giao hàng nhanh
+                    .small.text-white-50
+                        | Từ 2-4 giờ nội thành
 
             .table-responsive
 
@@ -27,52 +38,45 @@ mixin cartTable(cart)
                     thead
 
                         tr
-
-                            th.text-secondary.small.text-uppercase(style="width:90px") Ảnh
-
-                            th.text-secondary.small.text-uppercase Sản phẩm
-
-                            th.text-secondary.small.text-uppercase Giá
-
-                            th.text-secondary.small.text-uppercase Số lượng
-
-                            th.text-secondary.small.text-uppercase Thành tiền
-
+                            th.text-white-50.small.text-uppercase(style="width:90px") Ảnh
+                            th.text-white-50.small.text-uppercase Sản phẩm
+                            th.text-white-50.small.text-uppercase Giá
+                            th.text-white-50.small.text-uppercase Số lượng
+                            th.text-white-50.small.text-uppercase Thành tiền
                             th
 
                     tbody
 
                         each item in cart.products
 
-                            tr
+                            tr.cart-item-row
 
                                 td
-
-                                    img.rounded-3.shadow-sm(
-                                        src=`/images/${item.product.thumbnail}`
-                                        width="84"
-                                        height="84"
-                                        style="object-fit:cover"
-                                    )
+                                    .cart-product-thumb
+                                        img.rounded-4.shadow-sm(
+                                            src=`/images/${item.product.thumbnail}`
+                                            width="84"
+                                            height="84"
+                                            style="object-fit:cover"
+                                        )
 
                                 td
+                                    strong.d-block.mb-1.text-white
+                                        = item.product.name
 
-                                    strong.d-block.mb-1 =item.product.name
-
-                                    span.text-muted.small Màu đen • Bảo hành 24 tháng
+                                    span.text-white-50.small
+                                        | Màu đen • Bảo hành 24 tháng
 
                                 td.text-danger.fw-semibold
-
-                                    | =item.product.priceOut.toLocaleString() |đ
+                                    = item.salePrice.toLocaleString()
+                                    | đ
 
                                 td
-
                                     +quantity(item)
 
-                                td.fw-bold.text-dark
-
-                                    | =item.totalPrice.toLocaleString() |đ
+                                td.fw-bold.text-white
+                                    = item.totalPrice.toLocaleString()
+                                    | đ
 
                                 td
-
                                     +removeButton(item)

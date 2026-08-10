@@ -1,68 +1,59 @@
 mixin productInfo(product)
 
-    h2.fw-bold.mb-3= product.name
+    .detail-panel
+        h2.fw-bold.mb-3= product.name
 
-    .mb-3
-        span.badge.bg-dark.me-2= product.manufacturer.name
-        span.badge.bg-secondary= product.category
+        .mb-3
+            span.badge.bg-light.text-dark.me-2= product.manufacturer.name
+            span.badge.bg-secondary= product.category
 
-    hr
+        hr.border-secondary
 
-    .mb-3
-
-        span.text-decoration-line-through.text-secondary.fs-5
-            = product.priceOut.toLocaleString()
-            |  đ
-
-        br
-
-        span.text-danger.fw-bold.display-6
-            = product.salePrice.toLocaleString()
-            |  đ
-
-    hr
-
-    .row
-
-        .col-6.mb-2
-            strong CPU:
+        .mb-3
+            span.text-decoration-line-through.text-white-50.fs-5
+                = product.priceOut.toLocaleString()
+                |  đ
             br
-            = product.specifications.cpu.brand
-            |  
-            = product.specifications.cpu.model
+            span.text-danger.fw-bold.display-6
+                = product.salePrice.toLocaleString()
+                |  đ
 
-        .col-6.mb-2
-            strong RAM:
-            br
-            = product.specifications.ram.size
-            | GB 
-            = product.specifications.ram.type_
+        hr.border-secondary
 
-        .col-6.mb-2
-            strong SSD:
-            br
-            = product.specifications.storage.capacity
-            |  
-            = product.specifications.storage.type_
-
-        .col-6.mb-2
-            strong GPU:
-            br
-            = product.specifications.gpu.brand
-            |  
-            = product.specifications.gpu.model
-
-        .col-6.mb-2
-            strong Màn hình:
-            br
-            = product.specifications.display.size
-
-        .col-6.mb-2
-            strong Refresh Rate:
-            br
-            = product.specifications.display.refreshRate
-
-        .col-6.mb-2
-            strong Hệ điều hành:
-            br
-            = product.specifications.os
+        .row
+            .col-6.mb-3
+                strong CPU:
+                br
+                = product.specifications.cpu.brand
+                |  
+                = product.specifications.cpu.model
+            .col-6.mb-3
+                strong RAM:
+                br
+                = product.specifications.ram.size
+                | GB 
+                = product.specifications.ram.type_
+            .col-6.mb-3
+                strong SSD:
+                br
+                = product.specifications.storage.capacity
+                |  
+                = product.specifications.storage.type_
+            .col-6.mb-3
+                strong GPU:
+                br
+                = product.specifications.gpu.brand
+                |  
+                = product.specifications.gpu.model
+            .col-6.mb-3
+                strong Màn hình:
+                br
+                = product.specifications.display.size
+            .col-6.mb-3
+                strong Refresh Rate:
+                br
+                = product.specifications.display.refreshRate
+            .col-6.mb-3
+                strong Hệ điều hành:
+                br
+                = product.specifications.os

@@ -99,12 +99,16 @@ module.exports.index = async (req, res) => {
 
 // [POST] /cart/add/:id
 module.exports.addPost = async (req, res) => {
-
+    console.log(req.get("Referer"));
+    console.log("Đã vào addPost");
+    console.log(req.params);
     const productId = req.params.productId;
     const product = await Product.findById(productId);
-
     if (!product) {
-        return res.redirect("back");
+        return res.status(404).json({
+            success: false,
+            message: "Không tìm thấy sản phẩm"
+        });
     }
     //===============================
     // TRƯỜNG HỢP CHƯA ĐĂNG NHẬP
@@ -135,7 +139,10 @@ module.exports.addPost = async (req, res) => {
             maxAge: 1000 * 60 * 60 * 24 * 30
         });
 
-        return res.redirect("back");
+        return res.json({
+            success: true,
+            type: "cookie"
+        });
     }
 
     //===============================
@@ -149,7 +156,10 @@ module.exports.addPost = async (req, res) => {
 
     if (!user) {
 
-        return res.redirect("back");
+        return res.status(401).json({
+            success: false,
+            message: "Không tìm thấy người dùng"
+        });
 
     }
 
@@ -182,7 +192,10 @@ module.exports.addPost = async (req, res) => {
 
         await cart.save();
 
-        return res.redirect("back");
+        return res.json({
+            success: true,
+            type: "mongodb"
+        });
 
     }
 
@@ -216,7 +229,10 @@ module.exports.addPost = async (req, res) => {
 
     await cart.save();
 
-    return res.redirect("back");
+    return res.json({
+        success: true,
+        type: "mongodb"
+    });
 
 }; 
 
@@ -241,7 +257,10 @@ module.exports.update = async (req, res) => {
     const product = await Product.findById(productId);
 
     if (!product) {
-        return res.redirect("back");
+        return res.status(404).json({
+            success: false,
+            message: "Không tìm thấy sản phẩm"
+        });
     }
 
     //---------------------------------------
@@ -273,7 +292,10 @@ module.exports.update = async (req, res) => {
             });
         }
 
-        return res.redirect("back");
+        return res.json({
+            success: true,
+            type: "cookie"
+        });
     }
 
     //---------------------------------------
@@ -286,15 +308,21 @@ module.exports.update = async (req, res) => {
     });
 
     if (!user) {
-        return res.redirect("back");
-    }
+    return res.status(401).json({
+        success: false,
+        message: "Không tìm thấy người dùng"
+    });
+}
 
     const cart = await Cart.findOne({
         user_id: user._id.toString()
     });
 
     if (!cart) {
-        return res.redirect("back");
+        return res.status(404).json({
+            success: false,
+            message: "Không tìm thấy giỏ hàng"
+        });
     }
 
     const existProduct = cart.products.find(item =>
@@ -308,7 +336,10 @@ module.exports.update = async (req, res) => {
         await cart.save();
     }
 
-    res.redirect("back");
+    return res.json({
+        success: true,
+        type: "mongodb"
+    });
 
 }; 
 
@@ -333,7 +364,11 @@ module.exports.delete = async (req, res) => {
             maxAge: 1000 * 60 * 60 * 24 * 30
         });
 
-        return res.redirect("back");
+        return res.json({
+            success: true,
+            type: "cookie"
+        });
+
     }
 
     //---------------------------------------
@@ -346,7 +381,10 @@ module.exports.delete = async (req, res) => {
     });
 
     if (!user) {
-        return res.redirect("back");
+        return res.status(401).json({
+            success: false,
+            message: "Không tìm thấy người dùng"
+        });
     }
 
     const cart = await Cart.findOne({
@@ -354,7 +392,10 @@ module.exports.delete = async (req, res) => {
     });
 
     if (!cart) {
-        return res.redirect("back");
+        return res.status(404).json({
+            success: false,
+            message: "Không tìm thấy giỏ hàng"
+        });
     }
 
     //---------------------------------------
@@ -367,6 +408,9 @@ module.exports.delete = async (req, res) => {
 
     await cart.save();
 
-    res.redirect("back");
+    return res.json({
+        success: true,
+        type: "mongodb"
+    });
 
 };

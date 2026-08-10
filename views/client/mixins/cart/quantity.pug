@@ -1,14 +1,14 @@
 mixin quantity(item)
 
-    .input-group.input-group-sm(
-        style="width:120px"
-    )
+    .quantity-control.d-flex.align-items-center.gap-2
 
-        button.btn.btn-outline-secondary.btn-minus(
+        button.btn.btn-sm.quantity-step-btn.btn-minus(
             type="button"
             data-product-id=item.product_id
+            aria-label="Giảm số lượng"
         )
-            | -
+            span.fs-5
+                | −
 
         input.form-control.text-center.quantity-input(
             type="number"
@@ -18,8 +18,10 @@ mixin quantity(item)
             data-stock=item.product.stock
         )
 
-        button.btn.btn-outline-secondary.btn-plus(
+        button.btn.btn-sm.quantity-step-btn.btn-plus(
             type="button"
             data-product-id=item.product_id
+            aria-label="Tăng số lượng"
         )
-            | +
+            span.fs-5
+                | +

@@ -5,29 +5,57 @@ html(lang="vi")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
         title Web bán laptop
-        // Bootstrap CSS
         link(
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
             rel="stylesheet"
         )
-
-        // CSS riêng
+        link(
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        )
         link(
             rel="stylesheet"
             href="/css/style.css"
         )
 
-    body.bg-light
+    body
 
         include ../partials/header.pug
 
-        .container.py-4
-            block content
+        main
+            .container.py-4
+                block content
 
         include ../partials/footer.pug
 
         script(
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        ) 
-        // JavaScript của từng trang
+        )
+        script.
+            document.addEventListener('DOMContentLoaded', () => {
+                const slides = Array.from(document.querySelectorAll('.hero-slide'));
+                const dots = Array.from(document.querySelectorAll('.hero-dots button'));
+                let current = 0;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                dots.forEach((dot) => {
+                    dot.addEventListener('click', () => {
+                        current = Number(dot.dataset.index);
+                        showSlide(current);
+                    });
+                });
+
+                setInterval(() => {
+                    current = (current + 1) % slides.length;
+                    showSlide(current);
+                }, 5000);
+            });
         block script

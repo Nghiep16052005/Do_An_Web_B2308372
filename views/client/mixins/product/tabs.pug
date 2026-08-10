@@ -1,42 +1,43 @@
 mixin productTabs(product)
 
-    ul.nav.nav-tabs.mt-5(role="tablist")
+    .tabs-card.mt-5
+        ul.nav.nav-tabs.border-0.p-3.pb-0(role="tablist")
 
-        li.nav-item
-            button.nav-link.active(
-                data-bs-toggle="tab"
-                data-bs-target="#description"
-                type="button"
-            )
-                | Mô tả
+            li.nav-item
+                button.nav-link.active.text-white(
+                    data-bs-toggle="tab"
+                    data-bs-target="#description"
+                    type="button"
+                )
+                    | Mô tả
 
-        li.nav-item
-            button.nav-link(
-                data-bs-toggle="tab"
-                data-bs-target="#review"
-                type="button"
-            )
-                | Đánh giá
+            li.nav-item
+                button.nav-link.text-white(
+                    data-bs-toggle="tab"
+                    data-bs-target="#review"
+                    type="button"
+                )
+                    | Đánh giá
 
-    .tab-content.border.border-top-0.p-4.bg-white
+        .tab-content.p-4
 
-        .tab-pane.fade.show.active#description
+            .tab-pane.fade.show.active#description
 
-            h5.fw-bold.mb-3 Mô tả sản phẩm
+                h5.fw-bold.mb-3 Mô tả sản phẩm
 
-            p= product.description
+                p.text-white-50= product.description
 
-        .tab-pane.fade#review
+            .tab-pane.fade#review
 
-            h5.fw-bold.mb-3 Đánh giá
+                h5.fw-bold.mb-3 Đánh giá
 
-            p
-                strong Điểm đánh giá:
-                |  
-                = product.ratingAverage
-                | /5
+                p.text-white-50
+                    strong Điểm đánh giá:
+                    |  
+                    = product.ratingAverage
+                    | /5
 
-            p
-                strong Số lượt đánh giá:
-                |  
-                = product.reviewCount
+                p.text-white-50
+                    strong Số lượt đánh giá:
+                    |  
+                    = product.reviewCount

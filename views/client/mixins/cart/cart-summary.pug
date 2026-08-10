@@ -1,40 +1,47 @@
 mixin cartSummary(cart)
 
-    .card.shadow-sm.border-0.sticky-top.cart-summary
+    .card.sticky-top.cart-summary
 
         .card-body.p-4
 
-            h5.fw-bold.mb-4 Tóm tắt đơn hàng
+            .d-flex.align-items-center.gap-2.mb-3
+                span.cart-chip.cart-chip--accent
+                    i.fa-solid.fa-gift.me-2
+                    | Ưu đãi mới
+                span.badge.bg-white.text-dark.rounded-pill.px-3.py-2
+                    | Miễn phí ship
+
+            h5.fw-bold.mb-4.text-white Tóm tắt đơn hàng
 
             .d-flex.justify-content-between.mb-3
 
-                span.text-secondary
+                span.text-white-50
                     | Tạm tính
 
-                strong.text-dark
+                strong.text-white
                     = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"
 
             .d-flex.justify-content-between.mb-3
 
-                span.text-secondary
+                span.text-white-50
                     | Phí vận chuyển
 
                 strong.text-success
                     | Miễn phí
 
-            hr
+            hr.border-secondary
 
             .d-flex.justify-content-between.align-items-center.mb-4
 
-                h5.mb-0
+                h5.mb-0.text-white
                     | Tổng cộng
 
                 h4.mb-0.text-danger
-                    = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"  
-                    
+                    = (cart.totalPrice || 0).toLocaleString("vi-VN") + "đ"
+
             .d-grid
 
-                a.btn.btn-dark.btn-lg.rounded-pill(
+                a.btn.btn-light.text-dark.btn-lg.rounded-pill.shadow-sm(
                     href="/checkout"
                 )
 

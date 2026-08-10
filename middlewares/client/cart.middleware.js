@@ -1,13 +1,9 @@
-const User = require("../../models/user.model");
 const Cart = require("../../models/cart.model");
+const User = require("../../models/user.model");
 
-module.exports.infoUser = async (req, res, next) => {
+module.exports.cart = async (req, res, next) => {
 
-    console.log("Cookie:", req.cookies);
-
-    // Mặc định
-    res.locals.user = null;
-    res.locals.cartCount = 0;
+    let cartCount = 0;
 
     //--------------------------------
     // Chưa đăng nhập
@@ -17,13 +13,11 @@ module.exports.infoUser = async (req, res, next) => {
 
         const cart = req.cookies.cart || [];
 
-        let count = 0;
-
         cart.forEach(item => {
-            count += item.quantity;
+            cartCount += item.quantity;
         });
 
-        res.locals.cartCount = count;
+        res.locals.cartCount = cartCount;
 
         return next();
     }
@@ -37,34 +31,29 @@ module.exports.infoUser = async (req, res, next) => {
         deleted: false
     });
 
-    console.log("User:", user);
-
     if (!user) {
+
+        res.locals.cartCount = 0;
+
         return next();
     }
-
-    res.locals.user = user;
-
-    //--------------------------------
-    // Lấy giỏ hàng
-    //--------------------------------
 
     const cart = await Cart.findOne({
         user_id: user._id.toString()
     });
 
     if (!cart) {
+
+        res.locals.cartCount = 0;
+
         return next();
     }
 
-    let count = 0;
-
     cart.products.forEach(item => {
-        count += item.quantity;
+        cartCount += item.quantity;
     });
 
-    res.locals.cartCount = count;
+    res.locals.cartCount = cartCount;
 
     next();
-
-}
+};

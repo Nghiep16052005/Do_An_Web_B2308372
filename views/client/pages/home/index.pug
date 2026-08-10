@@ -1,52 +1,77 @@
 extends ../../layouts/default
 
-include ../../mixins/common/box-head
-include ../../mixins/common/auth-panel
-
 block content
-    .hero-section.rounded-4.shadow-sm.py-5.px-3.px-lg-5.mb-5
-        .container
-            .row.align-items-center.g-5
-                .col-lg-7
-                    span.badge.bg-dark.text-white.rounded-pill.px-3.py-2.mb-3 Thiết kế hiện đại • Bền bỉ • Hiệu năng cao
-                    h1.display-5.fw-bold.text-dark.mb-3 Laptop Store - Chọn laptop đúng phong cách của bạn
-                    p.lead.text-secondary.mb-4
-                        | Khám phá các mẫu laptop văn phòng, học tập và gaming với thiết kế tối giản, cấu hình mạnh mẽ và trải nghiệm mua sắm mượt mà.
-                    .d-flex.flex-wrap.gap-3
-                        a.btn.btn-dark.btn-lg.px-4(href="/products") Xem sản phẩm
-                        a.btn.btn-outline-dark.btn-lg.px-4(href="/account/login") Đăng nhập
-                .col-lg-5
-                    .card.border-0.shadow-lg.rounded-4.overflow-hidden
-                        .card-body.p-4
-                            .bg-light.rounded-3.p-4.text-center
-                                h3.fw-bold.mb-3 Tư vấn nhanh
-                                p.text-secondary.mb-4 Chúng tôi sẽ giúp bạn lựa chọn laptop phù hợp nhất với nhu cầu công việc và ngân sách.
-                                a.btn.btn-outline-dark(href="/products") Khám phá ngay
+    .hero-surface.rounded-5.py-5.px-4.px-lg-5.mb-5.fade-up
+        .hero-slider
+            .hero-slide.active(style="background:linear-gradient(135deg,#15321c 0%,#2e8b57 100%); color:#fff; padding:2rem;")
+                .row.align-items-center.g-4
+                    .col-lg-7
+                        span.badge.bg-dark.text-white.rounded-pill.px-3.py-2.mb-3
+                            i.fa-solid.fa-seedling.me-2
+                            | Xanh lá • Bền bỉ • Hiệu năng vượt trội
+                        h1.display-4.fw-bold.mb-3 Laptop Store
+                        p.lead.mb-4.text-white-50
+                            | Khám phá những chiếc laptop hiện đại, phù hợp cho công việc, học tập và giải trí với phong cách hiện đại, tươi mới và đầy sức sống.
+                        .d-flex.flex-wrap.gap-3
+                            a.btn.btn-dark.btn-lg.px-4(href="/products") Xem sản phẩm
+                            a.btn.btn-outline-light.btn-lg.px-4(href="/account/login") Đăng nhập
+                    .col-lg-5
+                        .card.border-0.rounded-4.p-4.shadow-lg(style="background:rgba(255,255,255,0.12); color:#fff;")
+                            h3.fw-bold.mb-3 Tư vấn nhanh
+                            p.text-white-50.mb-4 Chúng tôi sẵn sàng giúp bạn chọn đúng cấu hình, đúng ngân sách và đúng phong cách sử dụng.
+                            .d-grid.gap-2
+                                a.btn.btn-outline-light(href="/products") Khám phá ngay
+                                a.btn.btn-warning.text-dark(href="/cart") Xem giỏ hàng
+            .hero-slide(style="background:linear-gradient(135deg,#f2ffe8 0%,#ddf6cc 100%); color:#123; padding:2rem;")
+                .row.align-items-center.g-4
+                    .col-lg-7
+                        span.badge.bg-success.text-white.rounded-pill.px-3.py-2.mb-3
+                            i.fa-solid.fa-fire.me-2
+                            | Bán chạy trong tuần
+                        h1.display-5.fw-bold.mb-3 Sẵn sàng cho công việc và giải trí
+                        p.lead.mb-4.text-success-emphasis
+                            | Những mẫu laptop chiến thắng về hiệu năng, tản nhiệt và vẻ ngoài hiện đại.
+                        .d-flex.flex-wrap.gap-3
+                            a.btn.btn-success.btn-lg.px-4(href="/products") Khám phá ngay
+                            a.btn.btn-outline-dark.btn-lg.px-4(href="/cart") Xem giỏ hàng
+                    .col-lg-5
+                        .card.border-0.rounded-4.p-4.shadow-lg(style="background:#fff; color:#123;")
+                            h3.fw-bold.mb-3 Ưu đãi hấp dẫn
+                            p.text-secondary.mb-4 Giao hàng nhanh, bảo hành rõ ràng và hỗ trợ chọn cấu hình phù hợp nhất.
+                            a.btn.btn-success(href="/products") Xem sản phẩm
+            .hero-dots
+                button.active(type="button" data-index="0")
+                button(type="button" data-index="1")
 
-    .container.py-3
-        +boxHead('Sản phẩm nổi bật', 'Những lựa chọn được khách hàng yêu thích nhất hiện nay')
+    .section-glow.rounded-4.p-4.mb-5
+        .d-flex.align-items-center.justify-content-between.mb-4
+            div
+                h3.fw-bold.mb-1 Sản phẩm nổi bật
+                p.text-white-50.mb-0 Gần đây được khách hàng yêu thích nhất.
+            a.btn.btn-outline-light.rounded-pill(href="/products") Xem tất cả
         .row.g-4
-            each product in [{title:'Laptop văn phòng',desc:'Ổn định, hiệu năng mượt mà cho công việc hằng ngày.',badge:'Bán chạy'},{title:'Laptop gaming',desc:'Sức mạnh đồ họa cao, tản nhiệt tốt cho trò chơi.',badge:'Ưa thích'},{title:'Laptop học tập',desc:'Thiết kế nhẹ, pin lâu và giá hợp lý.',badge:'Tiết kiệm'}]
-                .col-md-4
-                    .card.h-100.border-0.shadow-sm.rounded-4.product-card
-                        .card-body.p-4
-                            span.badge.bg-dark.rounded-pill.mb-3= product.badge
-                            h5.card-title.fw-bold= product.title
-                            p.card-text.text-secondary= product.desc
-                        .card-footer.bg-white.border-0.p-4.pt-0
-                            a.btn.btn-dark.w-100(href="/products") Xem chi tiết
+            each product in featuredProducts
+                .col-md-6.col-lg-4
+                    .card.h-100.product-card
+                        img.card-img-top.product-image(src=`/images/${product.thumbnail}` alt=product.name)
+                        .card-body.d-flex.flex-column
+                            span.badge.bg-light.text-dark.rounded-pill.mb-3= product.manufacturer.name
+                            h5.card-title.fw-bold= product.name
+                            p.text-muted.mb-3= product.specifications.cpu.model
+                            .mt-auto
+                                h4.fw-bold.text-white= product.salePrice.toLocaleString("vi-VN") + " đ"
+                                a.btn.btn-outline-light.w-100.mt-3(href=`/products/${product.slug || product._id}`) Xem chi tiết
 
-    .container.py-5
-        .row.g-4
-            .col-md-4
-                .card.border-0.shadow-sm.rounded-4.h-100.p-4
-                    h5.fw-bold.mb-3 Tư vấn chuyên sâu
-                    p.text-secondary.mb-0 Chúng tôi hỗ trợ chọn laptop đúng nhu cầu và ngân sách với phong cách tư vấn rõ ràng.
-            .col-md-4
-                .card.border-0.shadow-sm.rounded-4.h-100.p-4
-                    h5.fw-bold.mb-3 Thanh toán linh hoạt
-                    p.text-secondary.mb-0 Nhiều phương thức thanh toán và chính sách bảo hành rõ ràng, minh bạch.
-            .col-md-4
-                .card.border-0.shadow-sm.rounded-4.h-100.p-4
-                    h5.fw-bold.mb-3 Giao hàng nhanh
-                    p.text-secondary.mb-0 Đơn hàng được xử lý nhanh chóng và giao tận nơi trong thời gian ngắn.
+    .row.g-4
+        .col-md-4
+            .card.h-100.p-4.border-0.shadow-sm.section-glow
+                h5.fw-bold.mb-3 Tư vấn chuyên sâu
+                p.text-white-50.mb-0 Chúng tôi hỗ trợ chọn laptop đúng nhu cầu và ngân sách với cách tư vấn rõ ràng và minh bạch.
+        .col-md-4
+            .card.h-100.p-4.border-0.shadow-sm.section-glow
+                h5.fw-bold.mb-3 Thanh toán linh hoạt
+                p.text-white-50.mb-0 Nhiều phương thức thanh toán và chính sách bảo hành rõ ràng, an tâm khi mua sắm.
+        .col-md-4
+            .card.h-100.p-4.border-0.shadow-sm.section-glow
+                h5.fw-bold.mb-3 Giao hàng nhanh
+                p.text-white-50.mb-0 Đơn hàng được xử lý nhanh chóng và giao tận nơi trong thời gian sớm nhất.
