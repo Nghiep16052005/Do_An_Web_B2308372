@@ -1,29 +1,30 @@
 mixin productAction(product)
 
-    .row.g-3.mt-3
+    .product-action-wrapper
+        .row.g-3
 
-        .col-md-6
+            .col-md-6
 
-            form.add-to-cart-form(
-                action=`/cart/add/${product._id}`
-                method="POST"
-            )
-
-                button.btn.btn-light.text-dark.w-100.py-3(
-                    type="submit"
-                    data-product-id=product._id
+                form.add-to-cart-form(
+                    action=`/cart/add/${product._id}`
+                    method="POST"
                 )
 
-                    i.fa-solid.fa-cart-shopping.me-2
+                    button.btn.product-main-action.py-3(
+                        type="submit"
+                        data-product-id=product._id
+                    )
 
-                    | Thêm vào giỏ
+                        i.fa-solid.fa-cart-shopping.me-2
 
-        .col-md-6
+                        | Thêm vào giỏ
 
-            a.btn.btn-outline-light.w-100.py-3(
-                href="#"
-            )
+            .col-md-6
 
-                i.fa-solid.fa-credit-card.me-2
+                a.btn.product-secondary-action.py-3(
+                    href="#"
+                )
 
-                | Mua ngay
+                    i.fa-solid.fa-credit-card.me-2
+
+                    | Mua ngay

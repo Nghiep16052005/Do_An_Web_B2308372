@@ -4,23 +4,17 @@ mixin productGallery(product)
 
         .card-body.p-3
 
-            img.img-fluid.rounded.w-100.product-gallery-main(
-                src=`/images/${product.thumbnail}`
-                alt=product.name
-                style="height: 420px; object-fit: cover;"
-            )
+            .product-zoom-wrapper
 
-            if product.images && product.images.length > 0
+                img.img-fluid.rounded.w-100.product-gallery-main(
+                    src=`/images/${product.thumbnail}`
+                    alt=product.name
+                    style="height: 420px; object-fit: cover;"
+                )
 
-                .row.g-2.mt-3
+                .product-zoom-lens
 
-                    each image, index in product.images
+            .gallery-intro.mt-3
 
-                        .col-3
-
-                            img.img-thumbnail.w-100.product-gallery-thumb(class=index === 0 ? 'active' : '')(
-                                src=`/images/${image}`
-                                data-src=`/images/${image}`
-                                alt=product.name
-                                style="cursor:pointer; height: 90px; object-fit: cover;"
-                            )
+                p.mb-0
+                    | Thiết kế mạnh mẽ, hiệu năng đỉnh cao, màn hình sắc nét và khả năng làm việc, chơi game vượt trội, mang đến trải nghiệm mượt mà, bền bỉ cho từng giờ làm việc và giải trí.

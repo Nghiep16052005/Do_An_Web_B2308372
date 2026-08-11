@@ -53,6 +53,7 @@ const notificationSchema = new mongoose.Schema(
             enum: [
                 "order_created",
                 "payment_pending",
+                "payment_verifying",
                 "payment_paid",
                 "payment_failed",
                 "order_confirmed",

@@ -33,6 +33,22 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
 
             ul.navbar-nav.ms-auto.mb-2.mb-lg-0.align-items-lg-center
 
+                // ==========================================
+                // GIỎ HÀNG (luôn hiển thị cho cả guest và user)
+                // ==========================================
+
+                li.nav-item
+                    a.btn.btn-outline-light.me-2.position-relative(
+                        href="/cart"
+                    )
+
+                        i.fa-solid.fa-cart-shopping.me-2
+
+                        | Giỏ hàng
+
+                        span#header-cart-count.badge.bg-light.text-dark.ms-2
+                            = cartCount || 0
+
                 if !user
 
                     li.nav-item
@@ -48,23 +64,6 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
                             | Đăng ký
 
                 else
-
-                    // ==========================================
-                    // GIỎ HÀNG
-                    // ==========================================
-
-                    li.nav-item
-                        a.btn.btn-outline-light.me-2.position-relative(
-                            href="/cart"
-                        )
-
-                            i.fa-solid.fa-cart-shopping.me-2
-
-                            | Giỏ hàng
-
-                            span#header-cart-count.badge.bg-light.text-dark.ms-2
-                                | 0
-
 
                     // ==========================================
                     // THÔNG BÁO

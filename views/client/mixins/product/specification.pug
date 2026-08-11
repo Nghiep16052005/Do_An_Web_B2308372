@@ -10,71 +10,71 @@ mixin productSpecification(product)
 
         .card-body.p-0
 
-            table.table.table-striped.table-hover.mb-0
+            table.table.spec-table.mb-0
 
                 tbody
 
-                    tr
-                        th(style="width:30%") Hãng
-                        td= product.manufacturer.name
+                    tr.spec-row-brand(style="background: linear-gradient(135deg, #efe3ff 0%, #d9c5ff 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Hãng
+                        td(style="color: #111111; font-weight: 600;")= product.manufacturer.name
 
-                    tr
-                        th Danh mục
-                        td= product.category
+                    tr.spec-row-category(style="background: linear-gradient(135deg, #f9ebc5 0%, #f2d38b 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Danh mục
+                        td(style="color: #111111; font-weight: 600;")= product.category
 
-                    tr
-                        th CPU
-                        td
+                    tr.spec-row-cpu(style="background: linear-gradient(135deg, #f4d7c5 0%, #e7b691 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") CPU
+                        td(style="color: #111111; font-weight: 600;")
                             = product.specifications.cpu.brand
                             |  
                             = product.specifications.cpu.model
 
-                    tr
-                        th RAM
-                        td
+                    tr.spec-row-ram(style="background: linear-gradient(135deg, #ddefff 0%, #b9d7ff 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") RAM
+                        td(style="color: #111111; font-weight: 600;")
                             = product.specifications.ram.size
                             | GB 
                             = product.specifications.ram.type_
 
-                    tr
-                        th Card đồ họa
-                        td
+                    tr.spec-row-gpu(style="background: linear-gradient(135deg, #fddfe7 0%, #f5bdd1 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Card đồ họa
+                        td(style="color: #111111; font-weight: 600;")
                             = product.specifications.gpu.brand
                             |  
                             = product.specifications.gpu.model
 
-                    tr
-                        th Ổ cứng
-                        td
+                    tr.spec-row-storage(style="background: linear-gradient(135deg, #d9f7e7 0%, #bfeecb 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Ổ cứng
+                        td(style="color: #111111; font-weight: 600;")
                             = product.specifications.storage.capacity
                             |  
                             = product.specifications.storage.type_
 
-                    tr
-                        th Màn hình
-                        td
+                    tr.spec-row-screen(style="background: linear-gradient(135deg, #fff5d4 0%, #f4e0a4 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Màn hình
+                        td(style="color: #111111; font-weight: 600;")
                             = product.specifications.display.size
 
-                    tr
-                        th Tần số quét
-                        td= product.specifications.display.refreshRate
+                    tr.spec-row-refresh(style="background: linear-gradient(135deg, #e9f9ff 0%, #cceaf9 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Tần số quét
+                        td(style="color: #111111; font-weight: 600;")= product.specifications.display.refreshRate
 
-                    tr
-                        th Hệ điều hành
-                        td= product.specifications.os
+                    tr.spec-row-os(style="background: linear-gradient(135deg, #efe9ff 0%, #d4ccff 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Hệ điều hành
+                        td(style="color: #111111; font-weight: 600;")= product.specifications.os
 
-                    tr
-                        th Tồn kho
-                        td= product.stock
+                    tr.spec-row-stock(style="background: linear-gradient(135deg, #dff9ee 0%, #c5eddc 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Tồn kho
+                        td(style="color: #111111; font-weight: 600;")= product.stock
 
-                    tr
-                        th Đã bán
-                        td= product.sold
+                    tr.spec-row-sold(style="background: linear-gradient(135deg, #f9f1d8 0%, #efddae 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Đã bán
+                        td(style="color: #111111; font-weight: 600;")= product.sold
 
-                    tr
-                        th Trạng thái
+                    tr.spec-row-status(style="background: linear-gradient(135deg, #f4e7ff 0%, #ddd0ff 100%); color: #111111;")
+                        th(style="width:30%; color: #111111; font-weight: 800;") Trạng thái
 
-                        td
+                        td(style="color: #111111; font-weight: 600;")
 
                             if product.status == "active"
 

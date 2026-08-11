@@ -294,9 +294,9 @@ module.exports.confirm = async (req, res) => {
         // 4. KIỂM TRA ORDER CÓ PHẢI CỦA USER KHÔNG
         // ==========================================
 
-        if (
-            order.user_id.toString() !== userId
-        ) {
+        const orderUserId = String(order.user_id || "");
+
+        if (orderUserId !== userId) {
 
             return res.status(403).send(
                 "Bạn không có quyền truy cập đơn hàng này."

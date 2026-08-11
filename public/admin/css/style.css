@@ -1,35 +1,35 @@
 .header {
-  background-color: #212529; /* Màu nền tối */
-  color: #ffffff;            /* Chữ màu trắng */
+  background-color: #7ecb74; /* Màu xanh lá nhạt theo yêu cầu */
+  color: #111111;
   padding: 15px 20px;
-  border-bottom: 1px solid #343a40;
+  border-bottom: 1px solid #62b05d;
 }
 
 .header .logo {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #111111;
+  margin: 0;
 }
 
 /* Style cho sidebar */
-/* Khung chứa bao bọc toàn bộ phần thân dưới header */
 .body {
   display: flex;
   align-items: flex-start;
-  min-height: calc(100vh - 56px); /* Full màn hình trừ đi chiều cao của header */
+  min-height: calc(100vh - 56px);
   background-color: #ffffff;
 }
 
-/* Định dạng cho thanh menu dọc (Sider) nằm sát góc trái */
 .sider {
-  width: 250px; /* Độ rộng của thanh menu */
-  background-color: #212529; /* Màu nền tối giống trong ảnh */
-  min-height: calc(100vh - 56px); /* Kéo dài nền tối xuống hết màn hình */
+  width: 250px;
+  background-color: #f3f3f3;
+  min-height: calc(100vh - 56px);
   box-sizing: border-box;
+  border-right: 1px solid #d9d9d9;
 }
 
-/* Định dạng danh sách menu bên trong */
 .sider .inner-menu ul {
   list-style-type: none;
   padding: 0;
@@ -37,26 +37,46 @@
 }
 
 .sider .inner-menu ul li {
-  border-bottom: 1px solid #343a40; /* Đường gạch ngang phân chia các mục */
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .sider .inner-menu ul li a {
   display: block;
-  padding: 12px 20px;
-  color: #ffffff; /* Màu chữ trắng */
+  padding: 18px 20px;
+  color: #111111;
   text-decoration: none;
-  font-size: 16px;
-  transition: background-color 0.2s ease;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Hiệu ứng khi di chuột qua menu */
 .sider .inner-menu ul li a:hover {
-  background-color: #343a40;
+  background-color: #e5f5de;
+  color: #111111;
 }
 
-/* Khu vực hiển thị nội dung chính bên phải */
 .main {
-  flex: 1; /* Tự động chiếm trọn phần không gian còn lại bên phải */
+  flex: 1;
   padding: 30px;
   box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.main h2 {
+  color: #111111;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.main .text-secondary {
+  color: #4d4d4d !important;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.main .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }

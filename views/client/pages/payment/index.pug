@@ -120,7 +120,9 @@ block content
 
                         p.text-secondary.small
 
-                            | Mã QR được tạo riêng cho đơn hàng của bạn.
+                            | Mã QR được tạo riêng cho đơn hàng 
+                            strong.text-dark= order._id
+                            | .
 
 
                         .bg-light.rounded-3.p-4.d-inline-block.mb-3
@@ -317,26 +319,14 @@ block content
                 | Về trang chủ
 
 
-// ==========================================
-// JAVASCRIPT
-// ==========================================
-
 block script
-
     script.
-
         function copyText(text) {
-
             navigator.clipboard.writeText(text)
                 .then(() => {
-
                     alert("Đã sao chép: " + text);
-
                 })
                 .catch(() => {
-
                     alert("Không thể sao chép.");
-
                 });
-
         }

@@ -8,21 +8,23 @@ include ../../mixins/product/specification
 include ../../mixins/product/login-modal
 block content
 
-    .container.py-4
+    .container.py-4.product-page-full
 
         +productBreadcrumb(product)
 
-        .row.g-5.mt-3
+        .product-detail-shell.mt-4
 
-            .col-lg-5
+            .row.g-4.align-items-stretch
 
-                +productGallery(product)
+                .col-lg-5
 
-            .col-lg-7
+                    +productGallery(product)
 
-                +productInfo(product)
+                .col-lg-7
 
-                +productAction(product)
+                    +productInfo(product)
+
+                    +productAction(product)
 
         +productTabs(product)
 

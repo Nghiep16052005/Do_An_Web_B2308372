@@ -1,59 +1,51 @@
 mixin productInfo(product)
 
     .detail-panel
-        h2.fw-bold.mb-3= product.name
+        h2.product-title.fw-bold.mb-3= product.name
 
-        .mb-3.d-flex.flex-wrap.align-items-center.g-2
-            span.badge.bg-warning.text-dark.rounded-pill.px-3.py-2.fw-bold= product.manufacturer.name
-            span.badge.bg-light.text-dark.rounded-pill.px-3.py-2.fw-semibold= product.category
+        .product-meta.mb-4.d-flex.flex-wrap.align-items-center.g-2
+            span.badge.product-brand-badge.rounded-pill.px-3.py-2.fw-bold= product.manufacturer.name
+            span.badge.product-category-badge.rounded-pill.px-3.py-2.fw-semibold= product.category
 
-        hr.border-dark
-
-        .mb-3
-            span.text-decoration-line-through.text-dark.fs-5
+        .price-block.mb-4
+            .old-price
                 = product.priceOut.toLocaleString()
                 |  đ
-            br
-            span.text-danger.fw-bold.display-6
+            .new-price
                 = product.salePrice.toLocaleString()
                 |  đ
 
-        hr.border-secondary
-
-        .row
-            .col-6.mb-3
-                strong CPU:
-                br
-                = product.specifications.cpu.brand
-                |  
-                = product.specifications.cpu.model
-            .col-6.mb-3
-                strong RAM:
-                br
-                = product.specifications.ram.size
-                | GB 
-                = product.specifications.ram.type_
-            .col-6.mb-3
-                strong SSD:
-                br
-                = product.specifications.storage.capacity
-                |  
-                = product.specifications.storage.type_
-            .col-6.mb-3
-                strong GPU:
-                br
-                = product.specifications.gpu.brand
-                |  
-                = product.specifications.gpu.model
-            .col-6.mb-3
-                strong Màn hình:
-                br
-                = product.specifications.display.size
-            .col-6.mb-3
-                strong Refresh Rate:
-                br
-                = product.specifications.display.refreshRate
-            .col-6.mb-3
-                strong Hệ điều hành:
-                br
-                = product.specifications.os
+        .spec-grid
+            .spec-item
+                span.label CPU:
+                span.value
+                    = product.specifications.cpu.brand
+                    |  
+                    = product.specifications.cpu.model
+            .spec-item
+                span.label RAM:
+                span.value
+                    = product.specifications.ram.size
+                    | GB 
+                    = product.specifications.ram.type_
+            .spec-item
+                span.label SSD:
+                span.value
+                    = product.specifications.storage.capacity
+                    |  
+                    = product.specifications.storage.type_
+            .spec-item
+                span.label GPU:
+                span.value
+                    = product.specifications.gpu.brand
+                    |  
+                    = product.specifications.gpu.model
+            .spec-item
+                span.label Màn hình:
+                span.value= product.specifications.display.size
+            .spec-item
+                span.label Refresh Rate:
+                span.value= product.specifications.display.refreshRate
+            .spec-item
+                span.label Hệ điều hành:
+                span.value= product.specifications.os
