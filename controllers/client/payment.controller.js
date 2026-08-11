@@ -1,7 +1,7 @@
 const QRCode = require("qrcode");
 const Order = require("../../models/order.model");
 const User = require("../../models/user.model");
-
+const Notification = require("../../models/notification.model");
 
 // ==========================================
 // GET /payment/:orderId
@@ -103,8 +103,7 @@ module.exports.index = async (req, res) => {
         // Lấy đúng mã đã lưu trong Order.
         //
 
-        const transferContent =
-            order.transferContent;
+        const transferContent = order.transferContent;
 
 
         // ==========================================
@@ -237,39 +236,90 @@ module.exports.confirm = async (req, res) => {
 
     try {
 
-        const orderId = req.params.orderId;
-
-
         // ==========================================
-        // 1. TÌM ORDER
+        // 1. BẮT BUỘC ĐĂNG NHẬP
         // ==========================================
 
-        const order = await Order.findById(orderId);
+        if (!req.cookies.tokenUser) {
 
-        if (!order) {
-
-            return res.status(404).send(
-
-                "Không tìm thấy đơn hàng"
-
+            return res.redirect(
+                "/account/login?redirect=/payment/" + req.params.orderId
             );
 
         }
 
 
         // ==========================================
-        // 2. ĐÃ THANH TOÁN
+        // 2. LẤY USER
         // ==========================================
 
-        if (order.paymentStatus === "paid") {
+        const user = await User.findOne({
 
-            return res.redirect("/");
+            token: req.cookies.tokenUser,
+
+            deleted: false
+
+        });
+
+
+        if (!user) {
+
+            return res.redirect("/account/login");
+
+        }
+
+
+        const userId = user._id.toString();
+
+
+        // ==========================================
+        // 3. TÌM ORDER
+        // ==========================================
+
+        const order = await Order.findById(
+            req.params.orderId
+        );
+
+
+        if (!order) {
+
+            return res.status(404).send(
+                "Không tìm thấy đơn hàng."
+            );
 
         }
 
 
         // ==========================================
-        // 3. NGƯỜI DÙNG BÁO ĐÃ CHUYỂN KHOẢN
+        // 4. KIỂM TRA ORDER CÓ PHẢI CỦA USER KHÔNG
+        // ==========================================
+
+        if (
+            order.user_id.toString() !== userId
+        ) {
+
+            return res.status(403).send(
+                "Bạn không có quyền truy cập đơn hàng này."
+            );
+
+        }
+
+
+        // ==========================================
+        // 5. ĐÃ THANH TOÁN
+        // ==========================================
+
+        if (order.paymentStatus === "paid") {
+
+            return res.redirect(
+                `/payment/${order._id}`
+            );
+
+        }
+
+
+        // ==========================================
+        // 6. CẬP NHẬT TRẠNG THÁI
         // ==========================================
 
         order.paymentStatus = "pending";
@@ -281,30 +331,46 @@ module.exports.confirm = async (req, res) => {
 
 
         // ==========================================
-        // 4. QUAY LẠI TRANG PAYMENT
+        // 7. TẠO THÔNG BÁO
+        // ==========================================
+
+        await Notification.create({
+
+            user_id: userId,
+
+            order_id: order._id.toString(),
+
+            title: "Đã gửi yêu cầu xác nhận thanh toán",
+
+            message:
+                `Bạn đã báo chuyển khoản cho đơn hàng #${order._id.toString().slice(-8)}. Đơn hàng đang chờ admin kiểm tra.`,
+
+            type: "payment_verifying",
+
+            isRead: false
+
+        });
+
+
+        // ==========================================
+        // 8. QUAY LẠI TRANG THANH TOÁN
         // ==========================================
 
         return res.redirect(
-
             `/payment/${order._id}?submitted=1`
-
         );
 
-    }
-    catch (error) {
+
+    } catch (error) {
 
         console.error(
-
-            "Confirm payment error:",
-
+            "Lỗi xác nhận thanh toán:",
             error
-
         );
 
+
         return res.status(500).send(
-
-            "Có lỗi xảy ra khi xác nhận thanh toán"
-
+            "Có lỗi xảy ra khi xác nhận thanh toán."
         );
 
     }

@@ -1,5 +1,5 @@
 const Order = require("../../models/order.model");
-
+const Notification = require("../../models/notification.model");
 
 // ==========================================
 // [GET] /admin/orders
@@ -127,6 +127,36 @@ module.exports.confirmPayment = async (req, res) => {
 
         await order.save();
 
+        // ==========================================
+        // THÔNG BÁO THANH TOÁN THÀNH CÔNG
+        // ==========================================
+
+        if (order.user_id) {
+
+            await Notification.create({
+
+                user_id: order.user_id,
+
+                order_id: order._id.toString(),
+
+                title: "Thanh toán thành công",
+
+                message:
+                    `Đơn hàng #${order._id.toString().slice(-8)} đã được xác nhận thanh toán thành công.`,
+
+                type: "payment_paid",
+
+                isRead: false
+
+            });
+
+        }
+
+        // ==========================================
+        // THÔNG BÁO HỦY THANH TOÁN
+        // ==========================================
+
+
         console.log("=================================");
         console.log("ADMIN ĐÃ XÁC NHẬN THANH TOÁN");
         console.log("Order ID:", order._id);
@@ -196,7 +226,30 @@ module.exports.cancelPayment = async (req, res) => {
         order.orderStatus = "cancelled";
 
         await order.save();
+        // ==========================================
+        // THÔNG BÁO THANH TOÁN THẤT BẠI
+        // ==========================================
 
+        if (order.user_id) {
+
+            await Notification.create({
+
+                user_id: order.user_id,
+
+                order_id: order._id.toString(),
+
+                title: "Thanh toán không thành công",
+
+                message:
+                    `Thanh toán của đơn hàng #${order._id.toString().slice(-8)} chưa được xác nhận. Đơn hàng đã bị hủy.`,
+
+                type: "payment_failed",
+
+                isRead: false
+
+            });
+
+        }
         console.log("=================================");
         console.log("ADMIN ĐÃ HỦY THANH TOÁN");
         console.log("Order ID:", order._id);

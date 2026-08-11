@@ -1,5 +1,6 @@
 const User = require("../../models/user.model");
 const Cart = require("../../models/cart.model");
+const Notification = require("../../models/notification.model");
 
 module.exports.infoUser = async (req, res, next) => {
 
@@ -8,6 +9,7 @@ module.exports.infoUser = async (req, res, next) => {
     // Mặc định
     res.locals.user = null;
     res.locals.cartCount = 0;
+    res.locals.unreadNotificationCount = 0;
 
     //--------------------------------
     // Chưa đăng nhập
@@ -44,6 +46,11 @@ module.exports.infoUser = async (req, res, next) => {
     }
 
     res.locals.user = user;
+
+    res.locals.unreadNotificationCount = await Notification.countDocuments({
+        user_id: user._id.toString(),
+        isRead: false
+    });
 
     //--------------------------------
     // Lấy giỏ hàng
