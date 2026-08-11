@@ -16,7 +16,7 @@ block content
             each notification in notifications
 
                 a.notification-item.d-block.text-decoration-none.text-dark.mb-3(
-                    href=notification.order_id ? `/orders/${notification.order_id}` : "#"
+                    href=notification.order_id ? `/notifications/detail/${notification._id}` : "#"
                     data-id=notification._id
                 )
 

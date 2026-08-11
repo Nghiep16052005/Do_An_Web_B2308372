@@ -1,5 +1,6 @@
 const Notification = require("../../models/notification.model");
 const User = require("../../models/user.model");
+const Order = require("../../models/order.model");
 
 
 // ==========================================
@@ -221,6 +222,99 @@ module.exports.unreadCount = async (req, res) => {
             count: 0
 
         });
+
+    }
+
+};
+
+// ==========================================
+// GET /notifications/detail/:id
+// Trang chi tiết thông báo / theo dõi đơn hàng
+// ==========================================
+
+module.exports.detail = async (req, res) => {
+
+    try {
+
+        const user = await getCurrentUser(req);
+
+        if (!user) {
+
+            return res.redirect("/account/login");
+
+        }
+
+        const notification = await Notification.findOne({
+
+            _id: req.params.id,
+
+            user_id: user._id.toString()
+
+        });
+
+        if (!notification) {
+
+            return res.status(404).render(
+                "client/pages/notification/detail",
+                {
+                    pageTitle: "Không tìm thấy thông báo",
+                    notification: null,
+                    order: null,
+                    user: user,
+                    status: null,
+                    paymentStatusLabel: "",
+                    orderStatusLabel: ""
+                }
+            );
+
+        }
+
+        const order = notification.order_id
+            ? await Order.findById(notification.order_id)
+            : null;
+
+        const paymentStatusLabel = {
+            pending: "Chờ thanh toán",
+            paid: "Đã thanh toán",
+            failed: "Thanh toán thất bại"
+        }[order?.paymentStatus || "pending"] || "Chờ thanh toán";
+
+        const orderStatusLabel = {
+            pending: "Đang chờ xác nhận",
+            confirmed: "Đã xác nhận",
+            shipping: "Đang giao hàng",
+            completed: "Hoàn thành",
+            cancelled: "Đã hủy"
+        }[order?.orderStatus || "pending"] || "Đang chờ xác nhận";
+
+        if (!notification.isRead) {
+
+            notification.isRead = true;
+            await notification.save();
+
+        }
+
+        return res.render(
+            "client/pages/notification/detail",
+            {
+                pageTitle: "Theo dõi đơn hàng",
+                notification,
+                order,
+                user,
+                status: {
+                    paymentStatusLabel,
+                    orderStatusLabel
+                },
+                paymentStatusLabel,
+                orderStatusLabel
+            }
+        );
+
+    } catch (error) {
+
+        console.error("Lỗi trang chi tiết thông báo:", error);
+
+        return res.status(500).send("Có lỗi xảy ra.");
 
     }
 
