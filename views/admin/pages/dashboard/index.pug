@@ -1,5 +1,85 @@
 extends ../../layouts/default.pug
 
 block main
-  h1 Dashboard
-  p Đây là trang tổng quan
+  .dashboard-page
+    .page-topbar
+      div
+        span.section-kicker Tổng quan hệ thống
+        h1.page-title Bảng điều khiển quản trị
+      .status-pill
+        i.fa-solid.fa-circle
+        | Hệ thống đang hoạt động
+
+    .stats-grid
+      .stat-card.primary
+        .card-icon
+          i.fa-solid.fa-bag-shopping
+        .card-info
+          span.label Tổng đơn hàng
+          strong= stats.totalOrders
+      .stat-card.success
+        .card-icon
+          i.fa-solid.fa-circle-check
+        .card-info
+          span.label Đã thanh toán
+          strong= stats.paidOrders
+      .stat-card.warning
+        .card-icon
+          i.fa-solid.fa-clock
+        .card-info
+          span.label Chờ xác nhận
+          strong= stats.pendingOrders
+      .stat-card.dark
+        .card-icon
+          i.fa-solid.fa-money-bill-wave
+        .card-info
+          span.label Doanh thu
+          strong= `${stats.totalRevenue.toLocaleString('vi-VN')} đ`
+
+    .content-grid
+      .panel
+        .panel-header
+          h2 Đơn hàng gần đây
+          a.btn-link(href="/admin/orders") Xem tất cả
+        if recentOrders.length
+          .recent-list
+            each order in recentOrders
+              .recent-item
+                .order-main
+                  .order-badge ##{order._id.toString().slice(-8)}
+                  .order-meta
+                    strong= order.customerInfo.fullName
+                    span= new Date(order.createdAt).toLocaleString("vi-VN")
+                .order-side
+                  strong= `${order.totalPrice.toLocaleString('vi-VN')} đ`
+                  span(class=`status status-${order.paymentStatus}`)
+                    if order.paymentStatus === "paid"
+                      | Đã thanh toán
+                    else if order.paymentStatus === "failed"
+                      | Thất bại
+                    else
+                      | Chờ xác nhận
+        else
+          .empty-box
+            i.fa-solid.fa-box-open
+            p Chưa có đơn hàng nào.
+
+      .panel
+        .panel-header
+          h2 Tình trạng hoạt động
+        .activity-list
+          .activity-item
+            .dot.green
+            div
+              span.label Đơn hàng hoàn tất
+              strong= `${stats.paidOrders} giao dịch`
+          .activity-item
+            .dot.orange
+            div
+              span.label Đang chờ xử lý
+              strong= `${stats.pendingOrders} đơn cần xử lý`
+          .activity-item
+            .dot.gray
+            div
+              span.label Tổng doanh thu
+              strong= `${stats.totalRevenue.toLocaleString('vi-VN')} đ`
