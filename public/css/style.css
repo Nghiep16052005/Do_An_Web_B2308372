@@ -798,10 +798,7 @@ a.btn.btn-warning:hover {
 
 .product-card .text-decoration-line-through {
     color: #111111 !important;
-}
-    border-color: #ffffff;
-    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.12);
-}
+} 
 
 .cart-page .empty-cart {
         background: #ffffff;
@@ -1370,5 +1367,5 @@ button[type="submit"]:hover,
 }
 
 footer .text-white-50 {
-    color: rgba(17, 17, 17, 0.72) !important;
+    color: rgba(17, 17, 17, 0.72);
 }
