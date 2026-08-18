@@ -50,6 +50,7 @@ module.exports.registerPost = async (req, res) => {
     if (existEmail) {
         return res.send("Email đã tồn tại");
     }
+
     // ma hoa mat khau 
     const hashPassword = bcrypt.hashSync(
         req.body.password,
@@ -67,14 +68,45 @@ module.exports.registerPost = async (req, res) => {
 
     // Lưu MongoDB
     await user.save();
-        res.cookie(
-        "tokenUser",
-        user.token
-    ); 
-controllers/client/account.controller.js
-    console.log("Cookie cart:", req.cookies.cart);
 
-    res.redirect("/");
+    // Lưu cookie đăng nhập
+    res.cookie("tokenUser", user.token);
+
+    // Merge giỏ hàng tạm từ cookie nếu có
+    const cookieCart = req.cookies.cart || [];
+
+    if (cookieCart.length > 0) {
+        let cart = await Cart.findOne({
+            user_id: user._id.toString()
+        });
+
+        if (!cart) {
+            cart = new Cart({
+                user_id: user._id.toString(),
+                products: []
+            });
+        }
+
+        for (const item of cookieCart) {
+            const existProduct = cart.products.find(product =>
+                product.product_id == item.product_id
+            );
+
+            if (existProduct) {
+                existProduct.quantity += item.quantity;
+            } else {
+                cart.products.push({
+                    product_id: item.product_id,
+                    quantity: item.quantity
+                });
+            }
+        }
+
+        await cart.save();
+        res.clearCookie("cart");
+    }
+
+    return res.redirect("/");
 }
 
     //form dang nhap 
