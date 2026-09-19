@@ -1,35 +1,64 @@
 require("dotenv").config();
 
 const express = require("express");
-const cookieParser = require("cookie-parser"); 
-const methodOverride = require("method-override");
-const userMiddleware = require("./middlewares/client/user.middleware");
+const cookieParser = require("cookie-parser");
+
+const database = require("./Backend/config/database");
+
+const adminRouter = require("./Backend/router/admin/index.route");
+const clientRouter = require("./Backend/router/client/index.router");
+
 const app = express();
 
-const database = require("./config/database");
-const systemConfig = require("./config/system");
+
+// ====================
+// Global Middlewares
+// ====================
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+// ====================
+// Database
+// ====================
+
 database.connect();
 
-app.use(express.urlencoded({
-    extended: true
-})); 
-app.use(cookieParser());
-app.use(userMiddleware.infoUser);
-app.set("views", "./views");
-app.set("view engine", "pug");
 
-// App Local Variables
-app.locals.prefixAdmin = systemConfig.prefixAdmin;
-app.use(express.static("public"));
+// ====================
+// Admin Routes
+// ====================
 
-const adminRoutes = require("./router/admin/index.route");
-const clientRoutes = require("./router/client/index.route");
+app.use("/api/admin", adminRouter);
 
-adminRoutes(app);
-clientRoutes(app);
 
-const PORT = process.env.PORT;
+// ====================
+// Client Routes
+// ====================
+
+app.use("/api/client", clientRouter);
+
+
+// ====================
+// Health Check
+// ====================
+
+app.get("/api/health", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Library Management API is running."
+    });
+});
+
+
+// ====================
+// Start Server
+// ====================
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server running at port ${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });

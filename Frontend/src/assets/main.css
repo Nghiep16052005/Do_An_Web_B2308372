@@ -1,0 +1,16 @@
+body {
+  background-color: #f8f9fa;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+}

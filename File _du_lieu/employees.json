@@ -1,0 +1,152 @@
+[
+    {
+        "employeeId": "EMP001",
+        "fullName": "Nguyen Van An",
+        "username": "nguyenvanan",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000001",
+        "address": "Ninh Kieu, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP002",
+        "fullName": "Tran Thi Binh",
+        "username": "tranthibinh",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000002",
+        "address": "Binh Thuy, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP003",
+        "fullName": "Le Van Cuong",
+        "username": "levancuong",
+        "password": "123456",
+        "position": "Library Manager",
+        "phoneNumber": "0901000003",
+        "address": "Cai Khe, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP004",
+        "fullName": "Pham Thi Dung",
+        "username": "phamthidung",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000004",
+        "address": "O Mon, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP005",
+        "fullName": "Hoang Van Em",
+        "username": "hoangvanem",
+        "password": "123456",
+        "position": "Library Assistant",
+        "phoneNumber": "0901000005",
+        "address": "Thot Not, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP006",
+        "fullName": "Vo Thi Hoa",
+        "username": "vothihoa",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000006",
+        "address": "Phong Dien, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP007",
+        "fullName": "Dang Van Giang",
+        "username": "dangvangiang",
+        "password": "123456",
+        "position": "Library Assistant",
+        "phoneNumber": "0901000007",
+        "address": "Co Do, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP008",
+        "fullName": "Bui Thi Hang",
+        "username": "buithihang",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000008",
+        "address": "Vinh Thanh, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP009",
+        "fullName": "Do Van Kien",
+        "username": "dovankien",
+        "password": "123456",
+        "position": "Library Manager",
+        "phoneNumber": "0901000009",
+        "address": "Ninh Kieu, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP010",
+        "fullName": "Nguyen Thi Lan",
+        "username": "nguyenthilan",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000010",
+        "address": "Cai Rang, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP011",
+        "fullName": "Tran Van Minh",
+        "username": "tranvanminh",
+        "password": "123456",
+        "position": "Library Assistant",
+        "phoneNumber": "0901000011",
+        "address": "Binh Thuy, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP012",
+        "fullName": "Phan Thi Ngoc",
+        "username": "phanthingoc",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000012",
+        "address": "O Mon, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP013",
+        "fullName": "Huynh Van Phuc",
+        "username": "huynhvanphuc",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000013",
+        "address": "Thot Not, Can Tho",
+        "status": "Active"
+    },
+    {
+        "employeeId": "EMP014",
+        "fullName": "Mai Thi Quy",
+        "username": "maithiquy",
+        "password": "123456",
+        "position": "Library Assistant",
+        "phoneNumber": "0901000014",
+        "address": "Cai Rang, Can Tho",
+        "status": "Inactive"
+    },
+    {
+        "employeeId": "EMP015",
+        "fullName": "Ly Van Son",
+        "username": "lyvanson",
+        "password": "123456",
+        "position": "Librarian",
+        "phoneNumber": "0901000015",
+        "address": "Ninh Kieu, Can Tho",
+        "status": "Active"
+    }
+]

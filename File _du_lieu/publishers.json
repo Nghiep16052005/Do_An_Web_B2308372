@@ -1,0 +1,107 @@
+[
+    {
+        "publisherId": "PUB001",
+        "name": "O'Reilly Media",
+        "address": "1005 Gravenstein Highway North, Sebastopol, CA",
+        "phoneNumber": "0700000001",
+        "email": "contact@oreilly.com"
+    },
+    {
+        "publisherId": "PUB002",
+        "name": "Penguin Random House",
+        "address": "1745 Broadway, New York, NY",
+        "phoneNumber": "0700000002",
+        "email": "info@penguinrandomhouse.com"
+    },
+    {
+        "publisherId": "PUB003",
+        "name": "HarperCollins",
+        "address": "195 Broadway, New York, NY",
+        "phoneNumber": "0700000003",
+        "email": "contact@harpercollins.com"
+    },
+    {
+        "publisherId": "PUB004",
+        "name": "Simon & Schuster",
+        "address": "1230 Avenue of the Americas, New York, NY",
+        "phoneNumber": "0700000004",
+        "email": "hello@simonandschuster.com"
+    },
+    {
+        "publisherId": "PUB005",
+        "name": "Macmillan Publishers",
+        "address": "120 Broadway, New York, NY",
+        "phoneNumber": "0700000005",
+        "email": "support@macmillan.com"
+    },
+    {
+        "publisherId": "PUB006",
+        "name": "Hachette Book Group",
+        "address": "1290 Avenue of the Americas, New York, NY",
+        "phoneNumber": "0700000006",
+        "email": "info@hbgusa.com"
+    },
+    {
+        "publisherId": "PUB007",
+        "name": "Scholastic",
+        "address": "557 Broadway, New York, NY",
+        "phoneNumber": "0700000007",
+        "email": "contact@scholastic.com"
+    },
+    {
+        "publisherId": "PUB008",
+        "name": "Pearson Education",
+        "address": "221 River Street, Hoboken, NJ",
+        "phoneNumber": "0700000008",
+        "email": "info@pearson.com"
+    },
+    {
+        "publisherId": "PUB009",
+        "name": "McGraw Hill",
+        "address": "1325 Avenue of the Americas, New York, NY",
+        "phoneNumber": "0700000009",
+        "email": "support@mheducation.com"
+    },
+    {
+        "publisherId": "PUB010",
+        "name": "Wiley",
+        "address": "111 River Street, Hoboken, NJ",
+        "phoneNumber": "0700000010",
+        "email": "info@wiley.com"
+    },
+    {
+        "publisherId": "PUB011",
+        "name": "Manning Publications",
+        "address": "20 Baldwin Road, Shelter Island, NY",
+        "phoneNumber": "0700000011",
+        "email": "support@manning.com"
+    },
+    {
+        "publisherId": "PUB012",
+        "name": "Packt Publishing",
+        "address": "Livery Place, 35 Livery Street, Birmingham, UK",
+        "phoneNumber": "0700000012",
+        "email": "contact@packt.com"
+    },
+    {
+        "publisherId": "PUB013",
+        "name": "Apress",
+        "address": "1 New York Plaza, New York, NY",
+        "phoneNumber": "0700000013",
+        "email": "info@apress.com"
+    },
+    {
+        "publisherId": "PUB014",
+        "name": "Addison-Wesley",
+        "address": "501 Boylston Street, Boston, MA",
+        "phoneNumber": "0700000014",
+        "email": "contact@addisonwesley.com"
+    },
+    {
+        "publisherId": "PUB015",
+        "name": "Oxford University Press",
+        "address": "Great Clarendon Street, Oxford, UK",
+        "phoneNumber": "0700000015",
+        "email": "contact@oup.com"
+    }
+]

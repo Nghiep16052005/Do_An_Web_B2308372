@@ -1,0 +1,20 @@
+{
+    "copy-project-context.filePathsToContext": [
+        {
+            "$mid": 1,
+            "fsPath": "c:\\Users\\Nghiep\\Documents\\Phat_Trien_ung_dung_web\\DoAnLon_B2308372\\Backend\\config\\database.js",
+            "_sep": 1,
+            "external": "file:///c%3A/Users/Nghiep/Documents/Phat_Trien_ung_dung_web/DoAnLon_B2308372/Backend/config/database.js",
+            "path": "/c:/Users/Nghiep/Documents/Phat_Trien_ung_dung_web/DoAnLon_B2308372/Backend/config/database.js",
+            "scheme": "file"
+        },
+        {
+            "$mid": 1,
+            "fsPath": "c:\\Users\\Nghiep\\Documents\\Phat_Trien_ung_dung_web\\DoAnLon_B2308372\\Backend\\config\\system.js",
+            "_sep": 1,
+            "external": "file:///c%3A/Users/Nghiep/Documents/Phat_Trien_ung_dung_web/DoAnLon_B2308372/Backend/config/system.js",
+            "path": "/c:/Users/Nghiep/Documents/Phat_Trien_ung_dung_web/DoAnLon_B2308372/Backend/config/system.js",
+            "scheme": "file"
+        }
+    ]
+}

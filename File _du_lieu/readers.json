@@ -1,0 +1,202 @@
+[
+{
+        "readerId": "R001",
+        "fullName": "Nguyen Van An",
+        "dateOfBirth": "2003-05-12",
+        "gender": "Male",
+        "address": "Ninh Kieu, Can Tho",
+        "phoneNumber": "0901234567",
+        "email": "an.nguyen@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R002",
+        "fullName": "Tran Thi Bich",
+        "dateOfBirth": "2002-08-25",
+        "gender": "Female",
+        "address": "Cai Rang, Can Tho",
+        "phoneNumber": "0912345678",
+        "email": "bich.tran@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R003",
+        "fullName": "Le Hoang Nam",
+        "dateOfBirth": "2004-01-18",
+        "gender": "Male",
+        "address": "Binh Thuy, Can Tho",
+        "phoneNumber": "0923456789",
+        "email": "nam.le@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R004",
+        "fullName": "Pham Minh Chau",
+        "dateOfBirth": "2001-11-03",
+        "gender": "Female",
+        "address": "O Mon, Can Tho",
+        "phoneNumber": "0934567890",
+        "email": "chau.pham@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R005",
+        "fullName": "Do Thanh Tung",
+        "dateOfBirth": "2000-07-30",
+        "gender": "Male",
+        "address": "Thot Not, Can Tho",
+        "phoneNumber": "0945678901",
+        "email": "tung.do@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R006",
+        "fullName": "Vo Thi Mai",
+        "dateOfBirth": "1999-04-15",
+        "gender": "Female",
+        "address": "Phong Dien, Can Tho",
+        "phoneNumber": "0956789012",
+        "email": "mai.vo@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R007",
+        "fullName": "Bui Van Quang",
+        "dateOfBirth": "1998-12-20",
+        "gender": "Male",
+        "address": "Co Do, Can Tho",
+        "phoneNumber": "0967890123",
+        "email": "quang.bui@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R008",
+        "fullName": "Dang Thi Thu",
+        "dateOfBirth": "2005-02-28",
+        "gender": "Female",
+        "address": "Vinh Thanh, Can Tho",
+        "phoneNumber": "0978901234",
+        "email": "thu.dang@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R009",
+        "fullName": "Hoang Ngoc Hai",
+        "dateOfBirth": "2002-06-11",
+        "gender": "Male",
+        "address": "Thoi Lai, Can Tho",
+        "phoneNumber": "0989012345",
+        "email": "hai.hoang@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R010",
+        "fullName": "Ngo Thi Yen",
+        "dateOfBirth": "2003-09-05",
+        "gender": "Female",
+        "address": "Ninh Kieu, Can Tho",
+        "phoneNumber": "0990123456",
+        "email": "yen.ngo@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R011",
+        "fullName": "Duong Van Long",
+        "dateOfBirth": "2001-03-22",
+        "gender": "Male",
+        "address": "Cai Rang, Can Tho",
+        "phoneNumber": "0909876543",
+        "email": "long.duong@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R012",
+        "fullName": "Ly Thi Hoa",
+        "dateOfBirth": "1997-10-14",
+        "gender": "Female",
+        "address": "Binh Thuy, Can Tho",
+        "phoneNumber": "0918765432",
+        "email": "hoa.ly@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R013",
+        "fullName": "Trinh Van Kien",
+        "dateOfBirth": "2000-11-25",
+        "gender": "Male",
+        "address": "O Mon, Can Tho",
+        "phoneNumber": "0927654321",
+        "email": "kien.trinh@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R014",
+        "fullName": "Phan Thi Lan",
+        "dateOfBirth": "1999-08-08",
+        "gender": "Female",
+        "address": "Thot Not, Can Tho",
+        "phoneNumber": "0936543210",
+        "email": "lan.phan@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R015",
+        "fullName": "Vu Van Hung",
+        "dateOfBirth": "1998-05-17",
+        "gender": "Male",
+        "address": "Phong Dien, Can Tho",
+        "phoneNumber": "0945432109",
+        "email": "hung.vu@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R016",
+        "fullName": "Chau Thi Nhu",
+        "dateOfBirth": "2004-12-12",
+        "gender": "Female",
+        "address": "Co Do, Can Tho",
+        "phoneNumber": "0954321098",
+        "email": "nhu.chau@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R017",
+        "fullName": "Lam Van Thang",
+        "dateOfBirth": "2003-01-30",
+        "gender": "Male",
+        "address": "Vinh Thanh, Can Tho",
+        "phoneNumber": "0963210987",
+        "email": "thang.lam@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R018",
+        "fullName": "Ton Thi Xuan",
+        "dateOfBirth": "2002-04-04",
+        "gender": "Female",
+        "address": "Thoi Lai, Can Tho",
+        "phoneNumber": "0972109876",
+        "email": "xuan.ton@example.com",
+        "status": "Active"
+    },
+    {
+        "readerId": "R019",
+        "fullName": "Truong Van Tuan",
+        "dateOfBirth": "1996-07-21",
+        "gender": "Male",
+        "address": "Ninh Kieu, Can Tho",
+        "phoneNumber": "0981098765",
+        "email": "tuan.truong@example.com",
+        "status": "Inactive"
+    },
+    {
+        "readerId": "R020",
+        "fullName": "Dinh Thi Quynh",
+        "dateOfBirth": "2005-10-09",
+        "gender": "Female",
+        "address": "Cai Rang, Can Tho",
+        "phoneNumber": "0990987654",
+        "email": "quynh.dinh@example.com",
+        "status": "Active"
+    }
+]
