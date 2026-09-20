@@ -1,155 +1,172 @@
 [
-    {
-        "bookId": "BOOK001",
-        "title": "Clean Code",
-        "author": "Robert C. Martin",
-        "publisherId": "PUB003",
-        "publicationYear": 2008,
-        "price": 410000,
-        "quantity": 15
-    },
-    {
-        "bookId": "BOOK002",
-        "title": "The Pragmatic Programmer",
-        "author": "Andrew Hunt, David Thomas",
-        "publisherId": "PUB004",
-        "publicationYear": 1999,
-        "price": 270000,
-        "quantity": 6
-    },
-    {
-        "bookId": "BOOK003",
-        "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
-        "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
-        "publisherId": "PUB005",
-        "publicationYear": 1994,
-        "price": 270000,
-        "quantity": 40
-    },
-    {
-        "bookId": "BOOK004",
-        "title": "Refactoring: Improving the Design of Existing Code",
-        "author": "Martin Fowler",
-        "publisherId": "PUB002",
-        "publicationYear": 1999,
-        "price": 600000,
-        "quantity": 9
-    },
-    {
-        "bookId": "BOOK005",
-        "title": "Code Complete",
-        "author": "Steve McConnell",
-        "publisherId": "PUB003",
-        "publicationYear": 2004,
-        "price": 340000,
-        "quantity": 39
-    },
-    {
-        "bookId": "BOOK006",
-        "title": "Effective Java",
-        "author": "Joshua Bloch",
-        "publisherId": "PUB002",
-        "publicationYear": 2001,
-        "price": 160000,
-        "quantity": 6
-    },
-    {
-        "bookId": "BOOK007",
-        "title": "Head First Design Patterns",
-        "author": "Eric Freeman, Elisabeth Robson",
-        "publisherId": "PUB002",
-        "publicationYear": 2004,
-        "price": 530000,
-        "quantity": 13
-    },
-    {
-        "bookId": "BOOK008",
-        "title": "Clean Architecture",
-        "author": "Robert C. Martin",
-        "publisherId": "PUB004",
-        "publicationYear": 2017,
-        "price": 320000,
-        "quantity": 40
-    },
-    {
-        "bookId": "BOOK009",
-        "title": "The Clean Coder",
-        "author": "Robert C. Martin",
-        "publisherId": "PUB003",
-        "publicationYear": 2011,
-        "price": 440000,
-        "quantity": 21
-    },
-    {
-        "bookId": "BOOK010",
-        "title": "Domain-Driven Design",
-        "author": "Eric Evans",
-        "publisherId": "PUB003",
-        "publicationYear": 2003,
-        "price": 290000,
-        "quantity": 28
-    },
-    {
-        "bookId": "BOOK011",
-        "title": "Introduction to Algorithms",
-        "author": "Thomas H. Cormen",
-        "publisherId": "PUB005",
-        "publicationYear": 1990,
-        "price": 190000,
-        "quantity": 37
-    },
-    {
-        "bookId": "BOOK012",
-        "title": "Cracking the Coding Interview",
-        "author": "Gayle Laakmann McDowell",
-        "publisherId": "PUB001",
-        "publicationYear": 2008,
-        "price": 200000,
-        "quantity": 18
-    },
-    {
-        "bookId": "BOOK013",
-        "title": "You Don't Know JS: Scope & Closures",
-        "author": "Kyle Simpson",
-        "publisherId": "PUB004",
-        "publicationYear": 2014,
-        "price": 480000,
-        "quantity": 22
-    },
-    {
-        "bookId": "BOOK014",
-        "title": "The Mythical Man-Month",
-        "author": "Frederick P. Brooks Jr.",
-        "publisherId": "PUB001",
-        "publicationYear": 1975,
-        "price": 230000,
-        "quantity": 45
-    },
-    {
-        "bookId": "BOOK015",
-        "title": "Grokking Algorithms",
-        "author": "Aditya Bhargava",
-        "publisherId": "PUB004",
-        "publicationYear": 2016,
-        "price": 240000,
-        "quantity": 47
-    },
-    {
-        "bookId": "BOOK016",
-        "title": "Working Effectively with Legacy Code",
-        "author": "Michael Feathers",
-        "publisherId": "PUB002",
-        "publicationYear": 2004,
-        "price": 350000,
-        "quantity": 29
-    },
-    {
-        "bookId": "BOOK017",
-        "title": "Soft Skills: The software developer's life manual",
-        "author": "John Sonmez",
-        "publisherId": "PUB005",
-        "publicationYear": 2014,
-        "price": 430000,
-        "quantity": 26
-    }
+{
+"bookId": "BOOK001",
+"title": "Clean Code",
+"author": "Robert C. Martin",
+"publisherId": "PUB001",
+"publicationYear": 2008,
+"price": 25,
+"quantity": 10,
+"image": "/images/1.webp"
+},
+{
+"bookId": "BOOK002",
+"title": "The Pragmatic Programmer",
+"author": "Andrew Hunt, David Thomas",
+"publisherId": "PUB001",
+"publicationYear": 1999,
+"price": 30,
+"quantity": 15,
+"image": "/images/2.webp"
+},
+{
+"bookId": "BOOK003",
+"title": "Design Patterns",
+"author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+"publisherId": "PUB002",
+"publicationYear": 1994,
+"price": 45,
+"quantity": 8,
+"image": "/images/3.webp"
+},
+{
+"bookId": "BOOK004",
+"title": "Refactoring",
+"author": "Martin Fowler",
+"publisherId": "PUB002",
+"publicationYear": 2018,
+"price": 40,
+"quantity": 12,
+"image": "/images/4.webp"
+},
+{
+"bookId": "BOOK005",
+"title": "Code Complete",
+"author": "Steve McConnell",
+"publisherId": "PUB003",
+"publicationYear": 2004,
+"price": 35,
+"quantity": 20,
+"image": "/images/5.webp"
+},
+{
+"bookId": "BOOK006",
+"title": "Head First Design Patterns",
+"author": "Eric Freeman, Elisabeth Robson",
+"publisherId": "PUB003",
+"publicationYear": 2004,
+"price": 28,
+"quantity": 14,
+"image": "/images/6.webp"
+},
+{
+"bookId": "BOOK007",
+"title": "Structure and Interpretation of Computer Programs",
+"author": "Harold Abelson, Gerald Jay Sussman",
+"publisherId": "PUB004",
+"publicationYear": 1996,
+"price": 50,
+"quantity": 5,
+"image": "/images/7.webp"
+},
+{
+"bookId": "BOOK008",
+"title": "Effective Java",
+"author": "Joshua Bloch",
+"publisherId": "PUB004",
+"publicationYear": 2017,
+"price": 32,
+"quantity": 25,
+"image": "/images/8.webp"
+},
+{
+"bookId": "BOOK009",
+"title": "JavaScript: The Good Parts",
+"author": "Douglas Crockford",
+"publisherId": "PUB005",
+"publicationYear": 2008,
+"price": 20,
+"quantity": 30,
+"image": "/images/9.webp"
+},
+{
+"bookId": "BOOK010",
+"title": "You Don't Know JS",
+"author": "Kyle Simpson",
+"publisherId": "PUB005",
+"publicationYear": 2015,
+"price": 22,
+"quantity": 18,
+"image": "/images/10.webp"
+},
+{
+"bookId": "BOOK011",
+"title": "Algorithms",
+"author": "Robert Sedgewick, Kevin Wayne",
+"publisherId": "PUB006",
+"publicationYear": 2011,
+"price": 55,
+"quantity": 7,
+"image": "/images/11.webp"
+},
+{
+"bookId": "BOOK012",
+"title": "Introduction to Algorithms",
+"author": "Thomas H. Cormen, Charles E. Leiserson",
+"publisherId": "PUB006",
+"publicationYear": 2009,
+"price": 60,
+"quantity": 6,
+"image": "/images/12.webp"
+},
+{
+"bookId": "BOOK013",
+"title": "Working Effectively with Legacy Code",
+"author": "Michael C. Feathers",
+"publisherId": "PUB001",
+"publicationYear": 2004,
+"price": 38,
+"quantity": 9,
+"image": "/images/13.webp"
+},
+{
+"bookId": "BOOK014",
+"title": "Domain-Driven Design",
+"author": "Eric Evans",
+"publisherId": "PUB002",
+"publicationYear": 2003,
+"price": 48,
+"quantity": 11,
+"image": "/images/14.webp"
+},
+{
+"bookId": "BOOK015",
+"title": "Patterns of Enterprise Application Architecture",
+"author": "Martin Fowler",
+"publisherId": "PUB003",
+"publicationYear": 2002,
+"price": 42,
+"quantity": 13,
+"image": "/images/15.webp"
+},
+{
+"bookId": "BOOK016",
+"title": "Continuous Delivery",
+"author": "Jez Humble, David Farley",
+"publisherId": "PUB004",
+"publicationYear": 2010,
+"price": 36,
+"quantity": 16,
+"image": "/images/16.webp"
+},
+{
+"bookId": "BOOK017",
+"title": "The Mythical Man-Month",
+"author": "Fred Brooks",
+"publisherId": "PUB005",
+"publicationYear": 1995,
+"price": 27,
+"quantity": 19,
+"image": "/images/17.webp"
+}
 ]

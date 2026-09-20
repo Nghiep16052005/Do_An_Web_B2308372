@@ -44,6 +44,12 @@ const bookSchema = new mongoose.Schema(
             required: true,
             min: 0,
             default: 0
+        },
+
+        image: {
+            type: String,
+            default: "/images/default-book.webp",
+            trim: true
         }
     },
     {
@@ -51,4 +57,4 @@ const bookSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("Book", bookSchema);    
+module.exports = mongoose.model("Book", bookSchema);

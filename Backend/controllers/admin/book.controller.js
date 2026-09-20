@@ -61,7 +61,8 @@ module.exports.createBook = async (req, res) => {
             publisherId,
             publicationYear,
             price,
-            quantity
+            quantity,
+            image
         } = req.body;
 
         // Check whether the book already exists
@@ -84,7 +85,8 @@ module.exports.createBook = async (req, res) => {
             publisherId,
             publicationYear,
             price,
-            quantity
+            quantity,
+            ...(image ? { image } : {})
         });
 
         await book.save();
@@ -115,7 +117,8 @@ module.exports.updateBook = async (req, res) => {
             publisherId,
             publicationYear,
             price,
-            quantity
+            quantity,
+            image
         } = req.body;
 
         const book = await Book.findOne({
@@ -151,6 +154,10 @@ module.exports.updateBook = async (req, res) => {
 
         if (quantity !== undefined) {
             book.quantity = quantity;
+        }
+
+        if (image !== undefined) {
+            book.image = image;
         }
 
         await book.save();

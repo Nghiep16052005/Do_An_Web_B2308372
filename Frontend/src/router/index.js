@@ -1,63 +1,38 @@
-import {
-    createRouter,
-    createWebHistory
-} from "vue-router";
-
-import Home from "@/views/Home.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import adminRoutes from "./admin.router";
+import clientRoutes from "./client.router";
+import AdminAuthService from "@/services/admin/auth.service";
+import ClientAuthService from "@/services/client/auth.service";
 
 const routes = [
-
-    {
-        path: "/",
-        name: "home",
-        component: Home
-    },
-
-    {
-        path: "/books",
-        name: "books",
-        component: () =>
-            import("@/views/BookListView.vue")
-    },
-
-    {
-        path: "/books/add",
-        name: "book-add",
-        component: () =>
-            import("@/views/BookAdd.vue")
-    },
-
-    {
-        path: "/books/edit/:id",
-        name: "book-edit",
-        component: () =>
-            import("@/views/BookEdit.vue")
-    },
-
-    {
-        path: "/borrow-records",
-        name: "borrow-records",
-        component: () =>
-            import("@/views/BorrowRecords.vue")
-    },
-
-    {
-        path: "/:pathMatch(.*)*",
-        name: "notfound",
-        component: () =>
-            import("@/views/NotFound.vue")
-    }
-
+    ...adminRoutes,
+    ...clientRoutes
 ];
 
 const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes,
+    scrollBehavior() {
+        return { top: 0 };
+    }
+});
 
-    history: createWebHistory(
-        import.meta.env.BASE_URL
-    ),
+router.beforeEach((to, from, next) => {
+    // Check Admin authorization
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
+        if (!AdminAuthService.isLoggedIn()) {
+            return next({ name: "admin-login", query: { redirect: to.fullPath } });
+        }
+    }
 
-    routes
+    // Check Reader authorization
+    if (to.matched.some(record => record.meta.requiresReader)) {
+        if (!ClientAuthService.isLoggedIn()) {
+            return next({ name: "client-login", query: { redirect: to.fullPath } });
+        }
+    }
 
+    next();
 });
 
 export default router;
