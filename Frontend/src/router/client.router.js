@@ -30,6 +30,12 @@ const clientRoutes = [
                 meta: { requiresReader: true }
             },
             {
+                path: "return-books",
+                name: "client-return-books",
+                component: () => import("@/views/client/borrow-records/ReturnBook.vue"),
+                meta: { requiresReader: true }
+            },
+            {
                 path: "/:pathMatch(.*)*",
                 name: "notfound",
                 component: () => import("@/views/client/NotFound.vue")

@@ -17,9 +17,24 @@ export default {
     mounted() {
         this.reader = ClientAuthService.getCurrentReader();
         this.fetchFeaturedBooks();
+        window.addEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
     },
 
     methods: {
+        handleRealtimeBookUpdate(event) {
+            const data = event.detail;
+            if (data && this.featuredBooks) {
+                const book = this.featuredBooks.find(b => b.bookId === data.bookId);
+                if (book) {
+                    book.quantity = data.quantity;
+                }
+            }
+        },
+
         async fetchFeaturedBooks() {
             this.loading = true;
             try {
@@ -46,7 +61,12 @@ export default {
         },
 
         formatCurrency(price) {
-            return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price || 0);
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(price || 0);
         },
 
         getBookImage(image) {

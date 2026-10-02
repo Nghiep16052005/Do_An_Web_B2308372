@@ -30,9 +30,24 @@ export default {
         } else {
             this.fetchBooks();
         }
+        window.addEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
     },
 
     methods: {
+        handleRealtimeBookUpdate(event) {
+            const data = event.detail;
+            if (data && this.books) {
+                const book = this.books.find(b => b.bookId === data.bookId);
+                if (book) {
+                    book.quantity = data.quantity;
+                }
+            }
+        },
+
         async fetchBooks() {
             this.loading = true;
             this.errorMessage = "";
@@ -81,7 +96,12 @@ export default {
         },
 
         formatCurrency(price) {
-            return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price || 0);
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(price || 0);
         },
 
         getBookImage(image) {

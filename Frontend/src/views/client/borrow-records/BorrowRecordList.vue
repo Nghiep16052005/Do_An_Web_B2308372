@@ -19,9 +19,21 @@ export default {
     mounted() {
         this.reader = ClientAuthService.getCurrentReader();
         this.fetchRecords();
+        window.addEventListener("borrow-record-updated", this.fetchRecords);
+        window.addEventListener("reader-auth-change", this.handleReaderAuthChange);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener("borrow-record-updated", this.fetchRecords);
+        window.removeEventListener("reader-auth-change", this.handleReaderAuthChange);
     },
 
     methods: {
+        handleReaderAuthChange() {
+            this.reader = ClientAuthService.getCurrentReader();
+            this.fetchRecords();
+        },
+
         async fetchRecords() {
             this.loading = true;
             this.errorMessage = "";
@@ -41,7 +53,7 @@ export default {
         },
 
         async handleReturnBook(record) {
-            if (!confirm(`Bạn có chắc chắn muốn trả sách "${record.bookId}" không?`)) {
+            if (!confirm(`Bạn có chắc chắn muốn gửi yêu cầu trả sách "${record.bookId}" đến Quản trị viên không?`)) {
                 return;
             }
 
@@ -52,14 +64,15 @@ export default {
             try {
                 const response = await ClientBorrowRecordService.returnBook(record._id);
                 if (response.success) {
-                    this.successMessage = `Đã trả sách mã ${record.bookId} thành công!`;
+                    this.successMessage = `Đã gửi yêu cầu trả sách mã ${record.bookId} thành công! Vui lòng chờ quản trị viên duyệt.`;
                     await this.fetchRecords();
+                    window.dispatchEvent(new CustomEvent("borrow-record-updated"));
                 } else {
-                    this.errorMessage = response.message || "Trả sách thất bại.";
+                    this.errorMessage = response.message || "Gửi yêu cầu trả sách thất bại.";
                 }
             } catch (error) {
                 console.error("Return book error:", error);
-                this.errorMessage = error.response?.data?.message || "Đã xảy ra lỗi khi thực hiện trả sách.";
+                this.errorMessage = error.response?.data?.message || "Đã xảy ra lỗi khi gửi yêu cầu trả sách.";
             } finally {
                 this.returningId = null;
             }
@@ -160,6 +173,9 @@ export default {
                                 <span v-if="r.status === 'Borrowing'" class="badge badge-primary">
                                     Đang mượn
                                 </span>
+                                <span v-else-if="r.status === 'ReturnPending'" class="badge badge-warning text-dark font-weight-bold">
+                                    <i class="fas fa-clock mr-1"></i> Chờ duyệt trả
+                                </span>
                                 <span v-else-if="r.status === 'Returned'" class="badge badge-success">
                                     Đã trả
                                 </span>
@@ -175,8 +191,11 @@ export default {
                                     @click="handleReturnBook(r)"
                                 >
                                     <span v-if="returningId === r._id" class="spinner-border spinner-border-sm mr-1"></span>
-                                    <i v-else class="fas fa-undo mr-1"></i> Trả sách
+                                    <i v-else class="fas fa-paper-plane mr-1"></i> Yêu cầu trả
                                 </button>
+                                <span v-else-if="r.status === 'ReturnPending'" class="badge badge-light border text-warning font-weight-semibold p-2">
+                                    <i class="fas fa-hourglass-half mr-1"></i> Chờ duyệt
+                                </span>
                                 <span v-else class="text-muted small">
                                     <i class="fas fa-check-double text-success"></i> Hoàn tất
                                 </span>

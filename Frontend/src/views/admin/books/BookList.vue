@@ -70,7 +70,12 @@ export default {
         },
 
         formatCurrency(value) {
-            return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value || 0);
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(value || 0);
         },
 
         getBookImage(image) {

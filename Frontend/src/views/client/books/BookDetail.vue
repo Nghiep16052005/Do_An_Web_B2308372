@@ -23,12 +23,41 @@ export default {
         };
     },
 
+    computed: {
+        formatDueDateText() {
+            if (!this.dueDate) return "";
+            const parts = this.dueDate.split("-");
+            if (parts.length === 3) {
+                return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+            return this.dueDate;
+        }
+    },
+
     mounted() {
         this.reader = ClientAuthService.getCurrentReader();
         this.fetchBook();
+        window.addEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
+        window.addEventListener("reader-auth-change", this.handleReaderAuthChange);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
+        window.removeEventListener("reader-auth-change", this.handleReaderAuthChange);
     },
 
     methods: {
+        handleReaderAuthChange() {
+            this.reader = ClientAuthService.getCurrentReader();
+        },
+
+        handleRealtimeBookUpdate(event) {
+            const data = event.detail;
+            if (this.book && data && data.bookId === this.book.bookId) {
+                this.book.quantity = data.quantity;
+            }
+        },
+
         async fetchBook() {
             this.loading = true;
             this.errorMessage = "";
@@ -55,6 +84,15 @@ export default {
                 });
                 return;
             }
+
+            // Tự động tính hạn trả = hôm nay + 15 ngày
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 15);
+            const yyyy = targetDate.getFullYear();
+            const mm = String(targetDate.getMonth() + 1).padStart(2, "0");
+            const dd = String(targetDate.getDate()).padStart(2, "0");
+            this.dueDate = `${yyyy}-${mm}-${dd}`;
+
             this.showBorrowModal = true;
             this.errorMessage = "";
             this.successMessage = "";
@@ -79,6 +117,8 @@ export default {
                     this.successMessage = "Đăng ký mượn sách thành công!";
                     this.showBorrowModal = false;
                     await this.fetchBook(); // Refresh quantity
+                    window.dispatchEvent(new CustomEvent("notification-updated"));
+                    window.dispatchEvent(new CustomEvent("borrow-record-updated"));
                 } else {
                     this.errorMessage = response.message || "Mượn sách thất bại.";
                 }
@@ -91,7 +131,12 @@ export default {
         },
 
         formatCurrency(price) {
-            return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price || 0);
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(price || 0);
         },
 
         getBookImage(image) {
@@ -260,7 +305,9 @@ export default {
                                 class="form-control" 
                                 required 
                             />
-                            <small class="text-muted">Chọn ngày bạn dự kiến mang trả sách cho thư viện.</small>
+                            <small class="text-muted d-block mt-1">
+                                <i class="fas fa-calendar-check text-success mr-1"></i> Hạn trả theo quy định là <strong>15 ngày</strong> kể từ hôm nay (đến ngày <strong>{{ formatDueDateText }}</strong>).
+                            </small>
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 pt-0">

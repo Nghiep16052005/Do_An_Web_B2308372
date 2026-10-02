@@ -38,7 +38,7 @@ const borrowRecordSchema = new mongoose.Schema(
 
         status: {
             type: String,
-            enum: ["Borrowing", "Returned", "Overdue"],
+            enum: ["Borrowing", "Returned", "Overdue", "ReturnPending"],
             default: "Borrowing"
         }
     },

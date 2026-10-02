@@ -7,6 +7,7 @@ const database = require("./Backend/config/database");
 
 const adminRouter = require("./Backend/router/admin/index.route");
 const clientRouter = require("./Backend/router/client/index.router");
+const sse = require("./Backend/utils/sse.util");
 
 const app = express();
 
@@ -25,6 +26,13 @@ app.use(cookieParser());
 // ====================
 
 database.connect();
+
+
+// ====================
+// SSE Stream (Real-time notifications)
+// ====================
+
+app.get("/api/notifications/stream", sse.subscribe);
 
 
 // ====================
