@@ -16,5 +16,8 @@
             "path": "/c:/Users/Nghiep/Documents/Phat_Trien_ung_dung_web/DoAnLon_B2308372/Backend/config/system.js",
             "scheme": "file"
         }
-    ]
+    ],
+    "files.associations": {
+        "*.vue": "vue"
+    }
 }
