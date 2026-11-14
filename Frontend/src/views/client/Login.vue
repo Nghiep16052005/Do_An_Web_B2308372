@@ -8,48 +8,20 @@ export default {
         return {
             readerId: "",
             phoneNumber: "",
-            rememberMe: true,
-            hasSavedCredentials: false,
+            showPassword: false,
             loading: false,
             errorMessage: ""
         };
     },
 
     mounted() {
-        this.loadSavedCredentials();
+        // Dọn dẹp dữ liệu lưu thủ công trong localStorage trước đây nếu có
+        localStorage.removeItem("saved_reader_id");
+        localStorage.removeItem("saved_reader_phone");
+        localStorage.removeItem("remember_reader");
     },
 
     methods: {
-        loadSavedCredentials() {
-            const saved = ClientAuthService.getSavedCredentials();
-            if (saved && (saved.readerId || saved.phoneNumber)) {
-                this.readerId = saved.readerId;
-                this.phoneNumber = saved.phoneNumber;
-                this.rememberMe = saved.remember;
-                this.hasSavedCredentials = true;
-            } else {
-                // Tự động điền thông tin độc giả mẫu R001 tiện lợi
-                this.readerId = "R001";
-                this.phoneNumber = "0901234567";
-                this.rememberMe = true;
-            }
-        },
-
-        useSampleAccount() {
-            this.readerId = "R001";
-            this.phoneNumber = "0901234567";
-            this.rememberMe = true;
-            this.errorMessage = "";
-        },
-
-        clearSaved() {
-            ClientAuthService.saveCredentials("", "", false);
-            this.readerId = "";
-            this.phoneNumber = "";
-            this.rememberMe = false;
-            this.hasSavedCredentials = false;
-        },
-
         async handleLogin() {
             this.loading = true;
             this.errorMessage = "";
@@ -61,13 +33,6 @@ export default {
                 });
 
                 if (response.success) {
-                    // Lưu thông tin đăng nhập vào trình duyệt theo lựa chọn
-                    ClientAuthService.saveCredentials(
-                        this.readerId, 
-                        this.phoneNumber, 
-                        this.rememberMe
-                    );
-
                     const redirect = this.$route.query.redirect || "/";
                     this.$router.push(redirect);
                 } else {
@@ -96,27 +61,11 @@ export default {
                     <p class="text-muted small">Nhập mã độc giả và số điện thoại đã đăng ký để tra cứu và mượn sách</p>
                 </div>
 
-                <!-- Thẻ trạng thái thông tin đã lưu -->
-                <div v-if="hasSavedCredentials" class="d-flex align-items-center justify-content-between mb-3 px-3 py-2 bg-light rounded small border">
-                    <div>
-                        <i class="fas fa-save text-success mr-1"></i>
-                        Đã lưu: <strong>{{ readerId }}</strong> ({{ phoneNumber }})
-                    </div>
-                    <button 
-                        type="button" 
-                        class="btn btn-link btn-sm p-0 text-danger text-decoration-none small"
-                        @click="clearSaved"
-                        title="Xoá thông tin đã lưu"
-                    >
-                        <i class="fas fa-trash-alt mr-1"></i> Xoá
-                    </button>
-                </div>
-
                 <div v-if="errorMessage" class="alert alert-danger py-2 small">
                     <i class="fas fa-exclamation-triangle mr-1"></i> {{ errorMessage }}
                 </div>
 
-                <form @submit.prevent="handleLogin">
+                <form @submit.prevent="handleLogin" autocomplete="on">
                     <div class="form-group mb-3">
                         <label class="font-weight-semibold small text-muted">Mã độc giả <span class="text-danger">*</span></label>
                         <div class="input-group">
@@ -124,54 +73,46 @@ export default {
                                 <span class="input-group-text bg-light"><i class="fas fa-id-card text-primary"></i></span>
                             </div>
                             <input 
+                                id="readerId"
+                                name="username"
                                 v-model.trim="readerId" 
                                 type="text" 
                                 class="form-control" 
                                 placeholder="Ví dụ: R001" 
+                                autocomplete="username"
                                 required 
                             />
                         </div>
                     </div>
 
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-4">
                         <label class="font-weight-semibold small text-muted">Số điện thoại <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fas fa-phone text-primary"></i></span>
+                                <span class="input-group-text bg-light"><i class="fas fa-lock text-primary"></i></span>
                             </div>
                             <input 
+                                id="phoneNumber"
+                                name="password"
                                 v-model.trim="phoneNumber" 
-                                type="tel" 
+                                :type="showPassword ? 'text' : 'password'" 
                                 class="form-control" 
-                                placeholder="Ví dụ: 0901234567" 
+                                placeholder="Nhập số điện thoại" 
+                                autocomplete="current-password"
                                 required 
                             />
+                            <div class="input-group-append">
+                                <button 
+                                    type="button" 
+                                    class="btn btn-outline-secondary" 
+                                    @click="showPassword = !showPassword"
+                                    tabindex="-1"
+                                    :title="showPassword ? 'Ẩn số điện thoại' : 'Hiện số điện thoại'"
+                                >
+                                    <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Tùy chọn lưu trên trình duyệt -->
-                    <div class="custom-control custom-checkbox mb-3">
-                        <input 
-                            type="checkbox" 
-                            class="custom-control-input" 
-                            id="rememberLogin"
-                            v-model="rememberMe"
-                        />
-                        <label class="custom-control-label small text-dark font-weight-medium" for="rememberLogin" style="cursor: pointer;">
-                            <i class="fas fa-shield-alt text-success mr-1"></i> Ghi nhớ đăng nhập trên trình duyệt này
-                        </label>
-                    </div>
-
-                    <!-- Nút tài khoản mẫu nhanh -->
-                    <div class="mb-3 text-right">
-                        <button 
-                            type="button" 
-                            class="btn btn-outline-info btn-sm font-weight-medium py-1 px-2"
-                            style="font-size: 0.8rem;"
-                            @click="useSampleAccount"
-                        >
-                            <i class="fas fa-magic mr-1"></i> Điền nhanh tài khoản: R001 - 0901234567
-                        </button>
                     </div>
 
                     <button 

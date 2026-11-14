@@ -6,7 +6,7 @@ export default {
 
 <template>
     <footer class="client-footer">
-        <div class="container">
+        <div class="app-fluid-container">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5 class="text-white mb-3">

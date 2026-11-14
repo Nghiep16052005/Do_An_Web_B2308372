@@ -260,7 +260,7 @@ export default {
                     <div 
                         v-for="record in filteredBooks" 
                         :key="record._id" 
-                        class="col-md-6 col-lg-4 mb-4"
+                        class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                     >
                         <div class="card h-100 shadow-sm border-0 return-card position-relative" style="border-radius: 14px; overflow: hidden;">
                             <!-- Trạng thái badge -->

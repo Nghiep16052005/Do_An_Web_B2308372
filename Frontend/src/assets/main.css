@@ -12,6 +12,7 @@
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --sidebar-width: 250px;
+  --sidebar-collapsed-width: 72px;
 }
 
 body {
@@ -21,19 +22,55 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #app {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
+/* Fluid Container Layout - Tương tự phong cách YouTube */
+.app-fluid-container {
+  width: 100%;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .app-fluid-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .app-fluid-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .app-fluid-container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}
+
 /* Navbar & Header */
 .app-navbar {
+  width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  z-index: 1020;
 }
 
 .navbar-brand {
@@ -44,10 +81,23 @@ body {
   gap: 8px;
 }
 
-/* Admin Layout */
+/* Đảm bảo cụm nút người dùng phía bên phải KHÔNG BAO GIỜ bị rớt dòng */
+.header-user-actions {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+.header-user-actions > * {
+  flex-shrink: 0 !important;
+}
+
+/* Admin Layout - YouTube Style Sidebar */
 .admin-wrapper {
   display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 
 .admin-sidebar {
@@ -58,7 +108,29 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: hidden;
+  white-space: nowrap;
+  z-index: 1030;
+}
+
+.admin-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.admin-sidebar.collapsed .sidebar-brand {
+  justify-content: center;
+  padding: 1.25rem 0.5rem;
+}
+
+.admin-sidebar.collapsed .nav-link {
+  justify-content: center;
+  padding: 0.85rem 0.5rem;
+}
+
+.admin-sidebar.collapsed .nav-link i {
+  font-size: 1.25rem;
+  margin: 0 !important;
 }
 
 .admin-sidebar .sidebar-brand {
@@ -70,6 +142,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: padding 0.25s ease;
 }
 
 .admin-sidebar .nav-link {
@@ -96,6 +169,8 @@ body {
   flex-direction: column;
   background-color: var(--bg-color);
   overflow-x: hidden;
+  min-width: 0; /* Ngăn flex item con làm tràn chiều rộng */
+  width: 100%;
 }
 
 .admin-header {
@@ -106,11 +181,27 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .admin-header {
+    padding: 0.75rem 2.5rem;
+  }
 }
 
 .admin-content {
   flex-grow: 1;
   padding: 1.5rem;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  .admin-content {
+    padding: 2rem 2.5rem;
+  }
 }
 
 .admin-footer {
@@ -120,6 +211,7 @@ body {
   font-size: 0.875rem;
   color: var(--text-muted);
   text-align: center;
+  width: 100%;
 }
 
 /* Client Layout */
@@ -127,12 +219,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
 .client-content {
   flex-grow: 1;
   padding-top: 1.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 3.5rem;
+  width: 100%;
 }
 
 .client-footer {
@@ -140,6 +234,7 @@ body {
   color: #cbd5e1;
   padding: 2.5rem 0 1.5rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
 }
 
 .client-footer a {

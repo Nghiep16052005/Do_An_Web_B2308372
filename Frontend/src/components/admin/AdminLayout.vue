@@ -10,15 +10,27 @@ export default {
         AdminHeader,
         AdminSidebar,
         AdminFooter
+    },
+
+    data() {
+        return {
+            isSidebarCollapsed: false
+        };
+    },
+
+    methods: {
+        toggleSidebar() {
+            this.isSidebarCollapsed = !this.isSidebarCollapsed;
+        }
     }
 };
 </script>
 
 <template>
     <div class="admin-wrapper">
-        <AdminSidebar />
+        <AdminSidebar :collapsed="isSidebarCollapsed" />
         <div class="admin-main">
-            <AdminHeader />
+            <AdminHeader :collapsed="isSidebarCollapsed" @toggle-sidebar="toggleSidebar" />
             <main class="admin-content">
                 <router-view />
             </main>

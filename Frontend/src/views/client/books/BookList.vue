@@ -200,7 +200,7 @@ export default {
 
         <!-- Book Cards Grid -->
         <div v-else class="row">
-            <div v-for="book in filteredBooks" :key="book.bookId" class="col-md-6 col-lg-4 mb-4">
+            <div v-for="book in filteredBooks" :key="book.bookId" class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
                 <div class="card h-100 shadow-sm card-hover book-card">
                     <!-- Book Cover Image -->
                     <div class="book-cover-container position-relative">

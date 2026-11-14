@@ -15,7 +15,7 @@ export default {
 <template>
     <div class="client-layout">
         <ClientHeader />
-        <main class="client-content container">
+        <main class="client-content app-fluid-container">
             <router-view />
         </main>
         <ClientFooter />

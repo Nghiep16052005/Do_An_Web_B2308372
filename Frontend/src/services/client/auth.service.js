@@ -46,25 +46,6 @@ class ClientAuthService {
     isLoggedIn() {
         return !!this.getCurrentReader();
     }
-
-    saveCredentials(readerId, phoneNumber, remember = true) {
-        if (remember) {
-            localStorage.setItem("saved_reader_id", readerId);
-            localStorage.setItem("saved_reader_phone", phoneNumber);
-            localStorage.setItem("remember_reader", "true");
-        } else {
-            localStorage.removeItem("saved_reader_id");
-            localStorage.removeItem("saved_reader_phone");
-            localStorage.removeItem("remember_reader");
-        }
-    }
-
-    getSavedCredentials() {
-        const readerId = localStorage.getItem("saved_reader_id") || "";
-        const phoneNumber = localStorage.getItem("saved_reader_phone") || "";
-        const remember = localStorage.getItem("remember_reader") === "true";
-        return { readerId, phoneNumber, remember };
-    }
 }
 
 export default new ClientAuthService();
