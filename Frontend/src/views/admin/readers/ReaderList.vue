@@ -44,7 +44,11 @@ export default {
                 }
             } catch (error) {
                 console.error("Fetch readers error:", error);
-                this.errorMessage = "Không thể kết nối đến máy chủ.";
+                if (error.response?.status === 401 || error.response?.status === 403) {
+                    this.errorMessage = "Phiên đăng nhập quản trị đã hết hạn hoặc chưa đăng nhập. Vui lòng đăng nhập lại.";
+                } else {
+                    this.errorMessage = error.response?.data?.message || "Không thể kết nối đến máy chủ thư viện.";
+                }
             } finally {
                 this.loading = false;
             }

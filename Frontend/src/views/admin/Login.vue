@@ -13,6 +13,12 @@ export default {
         };
     },
 
+    mounted() {
+        if (this.$route.query.expired) {
+            this.errorMessage = "Phiên làm việc quản trị đã hết hạn hoặc chưa đăng nhập. Vui lòng đăng nhập lại để tiếp tục.";
+        }
+    },
+
     methods: {
         async handleLogin() {
             this.loading = true;

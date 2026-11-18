@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports.requireAuth = (req, res, next) => {
     try {
-        const token = req.cookies?.accessToken;
+        const token = req.cookies?.readerToken || req.cookies?.accessToken;
 
         if (!token) {
             return res.status(401).json({

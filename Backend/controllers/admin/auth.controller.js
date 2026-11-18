@@ -64,17 +64,20 @@ module.exports.login = async (req, res) => {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: "1d"
+                expiresIn: "7d"
             }
         );
 
         // Store token in HTTP-only cookie
-        res.cookie("accessToken", token, {
+        const cookieOptions = {
             httpOnly: true,
             secure: false,
             sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000
-        });
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        };
+
+        res.cookie("adminToken", token, cookieOptions);
+        res.cookie("accessToken", token, cookieOptions);
 
         return res.status(200).json({
             success: true,
@@ -98,6 +101,7 @@ module.exports.login = async (req, res) => {
 
 // Employee logout
 module.exports.logout = (req, res) => {
+    res.clearCookie("adminToken");
     res.clearCookie("accessToken");
 
     return res.status(200).json({
