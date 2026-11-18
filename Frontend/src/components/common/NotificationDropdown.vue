@@ -147,6 +147,67 @@ export default {
                     }
                 });
 
+                this.eventSource.addEventListener("READER_LOCKED", (e) => {
+                    try {
+                        const data = JSON.parse(e.data);
+                        const current = JSON.parse(localStorage.getItem("client_user") || "{}");
+                        if (current && current.readerId === data.readerId) {
+                            current.status = "Blocked";
+                            current.lockReason = data.lockReason || "";
+                            localStorage.setItem("client_user", JSON.stringify(current));
+                            window.dispatchEvent(new CustomEvent("reader-auth-change", { detail: current }));
+                        }
+                        window.dispatchEvent(new CustomEvent("reader-locked", { detail: data }));
+                    } catch (err) {
+                        console.error("SSE reader locked error:", err);
+                    }
+                });
+
+                this.eventSource.addEventListener("READER_UNLOCKED", (e) => {
+                    try {
+                        const data = JSON.parse(e.data);
+                        const current = JSON.parse(localStorage.getItem("client_user") || "{}");
+                        if (current && current.readerId === data.readerId) {
+                            current.status = "Active";
+                            current.lockReason = "";
+                            localStorage.setItem("client_user", JSON.stringify(current));
+                            window.dispatchEvent(new CustomEvent("reader-auth-change", { detail: current }));
+                        }
+                        window.dispatchEvent(new CustomEvent("reader-unlocked", { detail: data }));
+                    } catch (err) {
+                        console.error("SSE reader unlocked error:", err);
+                    }
+                });
+
+                this.eventSource.addEventListener("PENALTY_APPROVED", (e) => {
+                    try {
+                        const data = JSON.parse(e.data);
+                        window.dispatchEvent(new CustomEvent("penalty-approved", { detail: data }));
+                        window.dispatchEvent(new CustomEvent("penalty-updated", { detail: data }));
+                    } catch (err) {
+                        console.error("SSE penalty approved error:", err);
+                    }
+                });
+
+                this.eventSource.addEventListener("PENALTY_UPDATED", (e) => {
+                    try {
+                        const data = JSON.parse(e.data);
+                        window.dispatchEvent(new CustomEvent("penalty-updated", { detail: data }));
+                    } catch (err) {
+                        console.error("SSE penalty updated error:", err);
+                    }
+                });
+
+                this.eventSource.addEventListener("PENALTY_PAYMENT_PENDING", (e) => {
+                    try {
+                        const data = JSON.parse(e.data);
+                        window.dispatchEvent(new CustomEvent("penalty-payment-pending", { detail: data }));
+                        window.dispatchEvent(new CustomEvent("penalty-updated", { detail: data }));
+                    } catch (err) {
+                        console.error("SSE penalty payment pending error:", err);
+                    }
+                });
+
                 this.eventSource.onerror = () => {
                     // EventSource will automatically retry in modern browsers
                 };
@@ -310,7 +371,21 @@ export default {
                     <div class="d-flex align-items-start">
                         <div class="mr-2 mt-1">
                             <span 
-                                v-if="item.type === 'BORROW'" 
+                                v-if="item.type === 'PENALTY'" 
+                                class="badge badge-danger rounded-circle p-2"
+                                title="Biên bản phạt"
+                            >
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </span>
+                            <span 
+                                v-else-if="item.type === 'WARNING'" 
+                                class="badge badge-warning text-dark rounded-circle p-2"
+                                title="Cảnh cáo trễ hạn"
+                            >
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span 
+                                v-else-if="item.type === 'BORROW'" 
                                 class="badge badge-primary rounded-circle p-2"
                                 title="Mượn sách"
                             >
@@ -356,7 +431,13 @@ export default {
                 @click="toast = null"
             >
                 <div class="mr-3 text-primary" style="font-size: 1.4rem;">
-                    <span v-if="toast.type === 'RETURN'" class="badge badge-success rounded-circle p-2">
+                    <span v-if="toast.type === 'PENALTY'" class="badge badge-danger rounded-circle p-2">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </span>
+                    <span v-else-if="toast.type === 'WARNING'" class="badge badge-warning text-dark rounded-circle p-2">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    <span v-else-if="toast.type === 'RETURN'" class="badge badge-success rounded-circle p-2">
                         <i class="fas fa-undo"></i>
                     </span>
                     <span v-else-if="toast.type === 'BORROW'" class="badge badge-primary rounded-circle p-2">
@@ -381,6 +462,12 @@ export default {
 </template>
 
 <style scoped>
+.notification-dropdown {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
 .bg-light-blue {
     background-color: #f0f7ff;
 }

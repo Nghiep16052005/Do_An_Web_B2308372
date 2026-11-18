@@ -92,6 +92,12 @@ const adminRoutes = [
                 path: "borrow-records/:id",
                 name: "admin-borrow-record-detail",
                 component: () => import("@/views/admin/borrow-records/BorrowRecordDetail.vue")
+            },
+            // Penalties & Fines
+            {
+                path: "penalties",
+                name: "admin-penalties",
+                component: () => import("@/views/admin/penalties/PenaltyList.vue")
             }
         ]
     }

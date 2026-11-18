@@ -73,9 +73,16 @@ export default {
                         <div class="avatar-circle mr-2 bg-primary text-white shadow-sm flex-shrink-0" style="width: 34px; height: 34px; min-width: 34px; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                             <i class="fas fa-user"></i>
                         </div>
-                        <span class="font-weight-bold text-dark text-nowrap d-none d-sm-inline" style="font-size: 0.88rem;">
-                            Xin chào, {{ reader.fullName }}
-                        </span>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <span class="font-weight-bold text-dark text-nowrap d-none d-sm-inline" style="font-size: 0.88rem;">
+                                    Xin chào, {{ reader.fullName }}
+                                </span>
+                                <span v-if="reader.status === 'Blocked'" class="badge badge-danger text-nowrap ml-2 shadow-xs" style="font-size: 0.7rem;" title="Tài khoản bị khóa tạm thời do nợ phạt quá 3 ngày">
+                                    <i class="fas fa-lock mr-1"></i>Tạm khóa
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Nút Đăng xuất -->
@@ -104,11 +111,12 @@ export default {
                 <!-- Nút Cổng Quản trị viên (Luôn luôn nằm cố định cùng hàng bên phải, KHÔNG BAO GIỜ BỊ RỚT DÒNG!) -->
                 <router-link 
                     to="/admin/login" 
-                    class="btn btn-outline-secondary btn-sm flex-shrink-0 shadow-sm"
-                    title="Cổng quản trị viên"
+                    class="btn btn-outline-secondary btn-sm flex-shrink-0 shadow-sm font-weight-semibold text-nowrap"
+                    title="Cổng dành cho Quản trị viên & Thủ thư"
                     style="padding: 0.35rem 0.65rem;"
                 >
-                    <i class="fas fa-user-shield text-dark"></i>
+                    <i class="fas fa-user-shield text-dark mr-1"></i>
+                    <span class="d-none d-sm-inline">Cổng Admin</span>
                 </router-link>
             </div>
 

@@ -172,8 +172,11 @@ export default {
                         <router-link :to="{ name: 'admin-publisher-add' }" class="btn btn-outline-warning btn-block text-left mb-2">
                             <i class="fas fa-building mr-2"></i> Thêm Nhà xuất bản
                         </router-link>
-                        <router-link :to="{ name: 'admin-borrow-records' }" class="btn btn-outline-info btn-block text-left">
+                        <router-link :to="{ name: 'admin-borrow-records' }" class="btn btn-outline-info btn-block text-left mb-2">
                             <i class="fas fa-clipboard-check mr-2"></i> Quản lý mượn trả sách
+                        </router-link>
+                        <router-link :to="{ name: 'admin-penalties' }" class="btn btn-outline-danger btn-block text-left">
+                            <i class="fas fa-file-invoice-dollar mr-2"></i> Quản lý Vi phạm & Tiền phạt
                         </router-link>
                     </div>
                 </div>

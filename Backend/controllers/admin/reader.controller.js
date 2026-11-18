@@ -1,8 +1,12 @@
 const Reader = require("../../models/Reader.model");
+const { scanAndLockAllOverduePenalties, checkAndApplyOverduePenalties } = require("../../utils/penalty.util");
 
 // GET /admin/readers
 module.exports.getAllReaders = async (req, res) => {
     try {
+        // Tự động kiểm tra nợ phạt quá 3 ngày và cập nhật trạng thái Blocked
+        await scanAndLockAllOverduePenalties();
+
         const readers = await Reader.find().sort({ createdAt: -1 });
 
         res.status(200).json({
@@ -22,6 +26,8 @@ module.exports.getAllReaders = async (req, res) => {
 // GET /admin/readers/:id
 module.exports.getReaderById = async (req, res) => {
     try {
+        await checkAndApplyOverduePenalties(req.params.id);
+
         const reader = await Reader.findOne({
             readerId: req.params.id
         });

@@ -25,6 +25,12 @@ export default {
         returnedCount() {
             return this.records.filter(r => r.status === "Returned").length;
         },
+        overdueCount() {
+            return this.records.filter(r => r.status === "Overdue").length;
+        },
+        lostCount() {
+            return this.records.filter(r => r.status === "Lost").length;
+        },
         filteredRecords() {
             let result = this.records;
             if (this.statusFilter !== "ALL") {
@@ -136,6 +142,10 @@ export default {
                     return "badge-success";
                 case "Overdue":
                     return "badge-danger";
+                case "Lost":
+                    return "badge-dark";
+                case "FoundReturned":
+                    return "badge-info";
                 default:
                     return "badge-secondary";
             }
@@ -151,6 +161,10 @@ export default {
                     return "Đã trả";
                 case "Overdue":
                     return "Quá hạn";
+                case "Lost":
+                    return "Đã báo mất";
+                case "FoundReturned":
+                    return "Đã tìm lại & Trả";
                 default:
                     return status;
             }
@@ -219,6 +233,22 @@ export default {
                                 @click="statusFilter = 'Returned'"
                             >
                                 Đã trả ({{ returnedCount }})
+                            </button>
+                            <button 
+                                type="button" 
+                                class="btn font-weight-semibold px-3"
+                                :class="statusFilter === 'Overdue' ? 'btn-danger' : 'btn-outline-danger'"
+                                @click="statusFilter = 'Overdue'"
+                            >
+                                Quá hạn ({{ overdueCount }})
+                            </button>
+                            <button 
+                                type="button" 
+                                class="btn font-weight-semibold px-3"
+                                :class="statusFilter === 'Lost' ? 'btn-dark' : 'btn-outline-dark'"
+                                @click="statusFilter = 'Lost'"
+                            >
+                                Báo mất ({{ lostCount }})
                             </button>
                         </div>
                     </div>
@@ -327,28 +357,19 @@ export default {
                             <td class="text-center text-nowrap">
                                 <router-link 
                                     :to="{ name: 'admin-borrow-record-detail', params: { id: r._id } }" 
-                                    class="btn btn-outline-info btn-sm mr-1"
-                                    title="Xem chi tiết phiếu mượn"
+                                    class="btn btn-primary btn-sm mr-1 font-weight-semibold shadow-sm"
+                                    title="Xem chi tiết phiếu mượn & Xử lý kiểm tra sách tại quầy"
                                 >
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fas fa-clipboard-check mr-1"></i> Chi tiết & Kiểm tra
                                 </router-link>
 
                                 <button 
                                     v-if="r.status === 'ReturnPending'"
                                     class="btn btn-warning btn-sm text-dark font-weight-bold shadow-sm mr-1"
-                                    title="Duyệt yêu cầu trả sách của độc giả"
+                                    title="Duyệt nhanh yêu cầu trả sách của độc giả"
                                     @click="handleApproveReturn(r)"
                                 >
-                                    <i class="fas fa-check-circle mr-1"></i> Duyệt
-                                </button>
-
-                                <button 
-                                    v-else-if="r.status === 'Borrowing'"
-                                    class="btn btn-outline-success btn-sm mr-1"
-                                    title="Xác nhận trả sách trực tiếp tại quầy"
-                                    @click="handleConfirmReturn(r)"
-                                >
-                                    <i class="fas fa-undo-alt mr-1"></i> Trả sách
+                                    <i class="fas fa-check-circle mr-1"></i> Duyệt nhanh
                                 </button>
                             </td>
                         </tr>

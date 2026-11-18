@@ -171,9 +171,12 @@ export default {
                             <td>{{ r.phoneNumber }}</td>
                             <td class="small">{{ r.email || "-" }}</td>
                             <td>
-                                <span :class="['badge', r.status === 'Active' ? 'badge-success' : 'badge-secondary']">
-                                    {{ r.status === 'Active' ? 'Hoạt động' : 'Tạm khóa' }}
+                                <span :class="['badge', r.status === 'Active' ? 'badge-success' : (r.status === 'Blocked' ? 'badge-danger' : 'badge-secondary')]">
+                                    {{ r.status === 'Active' ? 'Hoạt động' : (r.status === 'Blocked' ? 'Bị khóa tạm thời' : 'Vô hiệu') }}
                                 </span>
+                                <div v-if="r.status === 'Blocked' && r.lockReason" class="small text-danger mt-1" style="max-width: 220px; font-size: 0.72rem; line-height: 1.2;" :title="r.lockReason">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>{{ r.lockReason }}
+                                </div>
                             </td>
                             <td class="text-center text-nowrap">
                                 <router-link 

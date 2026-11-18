@@ -40,6 +40,30 @@ class AdminBorrowRecordService {
             };
         }
     }
+
+    async inspectAndReturn(id, payload) {
+        try {
+            const response = await this.api.post(`/${id}/inspect-return`, payload);
+            return response.data;
+        } catch (error) {
+            return {
+                success: false,
+                message: error.response?.data?.message || "Không thể tiếp nhận kiểm tra sách tại quầy."
+            };
+        }
+    }
+
+    async confirmLost(id, reason) {
+        try {
+            const response = await this.api.post(`/${id}/confirm-lost`, { reason });
+            return response.data;
+        } catch (error) {
+            return {
+                success: false,
+                message: error.response?.data?.message || "Không thể xác minh mất sách."
+            };
+        }
+    }
 }
 
 export default new AdminBorrowRecordService();

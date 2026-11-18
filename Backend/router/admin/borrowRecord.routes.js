@@ -17,4 +17,10 @@ router.get("/:id", borrowRecordController.getBorrowRecordById);
 // Update status
 router.put("/:id/status", borrowRecordController.updateStatus);
 
+// Tình huống 1: Nhân viên tiếp nhận & kiểm tra thực tế sách tại quầy
+router.post("/:id/inspect-return", borrowRecordController.inspectAndReturn);
+
+// Tình huống 3: Admin xác minh mất sách do quá hạn kéo dài
+router.post("/:id/confirm-lost", borrowRecordController.confirmLostByAdmin);
+
 module.exports = router;

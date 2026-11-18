@@ -1,10 +1,14 @@
 const Reader = require("../../models/Reader.model");
+const { checkAndApplyOverduePenalties } = require("../../utils/penalty.util");
 
 
 // Get current reader profile
 module.exports.getProfile = async (req, res) => {
     try {
         const readerId = req.user.readerId;
+
+        // Quét cập nhật cảnh báo & trạng thái khóa tài khoản nợ phạt quá 3 ngày
+        await checkAndApplyOverduePenalties(readerId);
 
         const reader = await Reader.findOne({
             readerId: readerId

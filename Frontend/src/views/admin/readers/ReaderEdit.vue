@@ -173,7 +173,8 @@ export default {
                             <label class="font-weight-semibold">Trạng thái <span class="text-danger">*</span></label>
                             <select v-model="formData.status" class="form-control" required>
                                 <option value="Active">Hoạt động</option>
-                                <option value="Inactive">Tạm khóa</option>
+                                <option value="Blocked">Bị khóa tạm thời (Nợ phạt)</option>
+                                <option value="Inactive">Vô hiệu hóa</option>
                             </select>
                         </div>
                     </div>

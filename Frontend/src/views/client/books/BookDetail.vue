@@ -2,6 +2,7 @@
 import ClientBookService from "@/services/client/book.service";
 import ClientAuthService from "@/services/client/auth.service";
 import ClientBorrowRecordService from "@/services/client/borrowRecord.service";
+import ClientPenaltyService from "@/services/client/penalty.service";
 
 export default {
     name: "ClientBookDetail",
@@ -19,7 +20,8 @@ export default {
             dueDate: defaultDue.toISOString().split("T")[0],
             errorMessage: "",
             successMessage: "",
-            showBorrowModal: false
+            showBorrowModal: false,
+            penaltyStats: null
         };
     },
 
@@ -31,12 +33,21 @@ export default {
                 return `${parts[2]}/${parts[1]}/${parts[0]}`;
             }
             return this.dueDate;
+        },
+
+        hasUnpaidPenalties() {
+            return this.penaltyStats && this.penaltyStats.totalPendingAmount > 0;
+        },
+
+        isBlocked() {
+            return this.reader && this.reader.status === "Blocked";
         }
     },
 
     mounted() {
         this.reader = ClientAuthService.getCurrentReader();
         this.fetchBook();
+        this.checkReaderPenalties();
         window.addEventListener("book-quantity-updated", this.handleRealtimeBookUpdate);
         window.addEventListener("reader-auth-change", this.handleReaderAuthChange);
     },
@@ -49,6 +60,22 @@ export default {
     methods: {
         handleReaderAuthChange() {
             this.reader = ClientAuthService.getCurrentReader();
+            this.checkReaderPenalties();
+        },
+
+        async checkReaderPenalties() {
+            if (!this.reader) {
+                this.penaltyStats = null;
+                return;
+            }
+            try {
+                const response = await ClientPenaltyService.getMyPenalties();
+                if (response.success && response.stats) {
+                    this.penaltyStats = response.stats;
+                }
+            } catch {
+                // Ignore silent penalty check error
+            }
         },
 
         handleRealtimeBookUpdate(event) {
@@ -82,6 +109,12 @@ export default {
                     name: "client-login",
                     query: { redirect: this.$route.fullPath }
                 });
+                return;
+            }
+
+            // Tình huống 4: Chặn mượn sách nếu còn nợ phạt chưa thanh toán
+            if (this.hasUnpaidPenalties) {
+                this.errorMessage = `Tài khoản của bạn đang có tiền phạt chưa thanh toán (${this.formatCurrency(this.penaltyStats.totalPendingAmount)}). Vui lòng hoàn tất nộp phạt tại mục Trả sách trước khi mượn tiếp!`;
                 return;
             }
 
@@ -269,13 +302,43 @@ export default {
                             Bạn cần đăng nhập để thực hiện mượn sách.
                         </div>
 
+                        <!-- Cảnh báo tài khoản bị khóa tạm thời do quá 3 ngày -->
+                        <div v-if="isBlocked" class="alert alert-danger py-2 px-3 small mb-3 border-danger shadow-sm" style="border-radius: 8px;">
+                            <i class="fas fa-lock text-danger mr-1"></i>
+                            <strong>Tài khoản đã bị KHÓA TẠM THỜI:</strong>
+                            <div class="mt-1">{{ reader.lockReason || "Bạn có khoản tiền phạt quá hạn 3 ngày chưa thanh toán." }}</div>
+                            <router-link :to="{ name: 'client-return-books' }" class="d-block mt-2 font-weight-bold text-danger text-underline">
+                                <i class="fas fa-credit-card mr-1"></i> Đến mục Trả sách để nộp phạt & mở khóa ngay &rarr;
+                            </router-link>
+                        </div>
+
+                        <!-- Cảnh báo nợ phạt thông thường (Tình huống 4) -->
+                        <div v-else-if="hasUnpaidPenalties" class="alert alert-danger py-2 px-3 small mb-3">
+                            <i class="fas fa-ban text-danger mr-1"></i>
+                            <strong>Tài khoản tạm hoãn mượn:</strong> Bạn đang có khoản phạt chưa thanh toán (<strong>{{ formatCurrency(penaltyStats.totalPendingAmount) }}</strong>).
+                            <router-link :to="{ name: 'client-return-books' }" class="d-block mt-1 font-weight-bold text-danger text-underline">
+                                <i class="fas fa-credit-card mr-1"></i> Đến mục Trả sách để nộp phạt &rarr;
+                            </router-link>
+                        </div>
+
                         <button 
                             class="btn btn-primary btn-block btn-lg font-weight-bold" 
-                            :disabled="book.quantity <= 0"
+                            :class="{ 'btn-secondary': isBlocked || hasUnpaidPenalties || book.quantity <= 0 }"
+                            :disabled="book.quantity <= 0 || hasUnpaidPenalties || isBlocked"
                             @click="openBorrowDialog"
                         >
-                            <i class="fas fa-hand-holding mr-1"></i>
-                            {{ book.quantity > 0 ? 'Mượn cuốn sách này' : 'Tạm hết sách' }}
+                            <span v-if="isBlocked">
+                                <i class="fas fa-user-lock mr-1"></i> Tài khoản bị khóa tạm thời
+                            </span>
+                            <span v-else-if="hasUnpaidPenalties">
+                                <i class="fas fa-lock mr-1"></i> Bị khóa do nợ phạt
+                            </span>
+                            <span v-else-if="book.quantity <= 0">
+                                <i class="fas fa-box-open mr-1"></i> Tạm hết sách
+                            </span>
+                            <span v-else>
+                                <i class="fas fa-hand-holding mr-1"></i> Mượn cuốn sách này
+                            </span>
                         </button>
                     </div>
                 </div>

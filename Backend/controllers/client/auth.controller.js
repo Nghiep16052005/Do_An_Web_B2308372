@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const Reader = require("../../models/Reader.model");
+const { checkAndApplyOverduePenalties } = require("../../utils/penalty.util");
 
 // ====================
 // Reader Login
@@ -32,18 +33,22 @@ module.exports.login = async (req, res) => {
             });
         }
 
-        // Check reader status
-        if (reader.status !== "Active") {
+        // Quét tự động nợ phạt quá 3 ngày để cập nhật trạng thái mới nhất
+        await checkAndApplyOverduePenalties(reader.readerId);
+        const currentReader = await Reader.findOne({ readerId: reader.readerId }) || reader;
+
+        // Chặn hoàn toàn nếu tài khoản Inactive (bị vô hiệu hóa thủ công)
+        if (currentReader.status === "Inactive") {
             return res.status(403).json({
                 success: false,
-                message: "Reader account is inactive."
+                message: "Tài khoản độc giả chưa kích hoạt hoặc đã ngừng hoạt động."
             });
         }
 
         // Create JWT
         const token = jwt.sign(
             {
-                readerId: reader.readerId,
+                readerId: currentReader.readerId,
                 role: "Reader"
             },
             process.env.JWT_SECRET,
@@ -62,13 +67,16 @@ module.exports.login = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Reader login successful.",
+            message: currentReader.status === "Blocked"
+                ? "Đăng nhập thành công. Chú ý: Tài khoản của bạn đang bị khóa mượn sách tạm thời do quá hạn nộp phạt 3 ngày."
+                : "Reader login successful.",
             data: {
-                readerId: reader.readerId,
-                fullName: reader.fullName,
-                phoneNumber: reader.phoneNumber,
-                email: reader.email,
-                status: reader.status
+                readerId: currentReader.readerId,
+                fullName: currentReader.fullName,
+                phoneNumber: currentReader.phoneNumber,
+                email: currentReader.email,
+                status: currentReader.status,
+                lockReason: currentReader.lockReason || ""
             }
         });
 

@@ -113,9 +113,12 @@ export default {
                         <span class="small text-muted">{{ reader.readerId }}</span>
                     </div>
                 </div>
-                <span :class="['badge', reader.status === 'Active' ? 'badge-success' : 'badge-secondary']">
-                    {{ reader.status === 'Active' ? 'Hoạt động' : 'Tạm khóa' }}
+                <span :class="['badge', reader.status === 'Active' ? 'badge-success' : (reader.status === 'Blocked' ? 'badge-danger' : 'badge-secondary')]">
+                    {{ reader.status === 'Active' ? 'Hoạt động' : (reader.status === 'Blocked' ? 'Bị khóa tạm thời' : 'Vô hiệu') }}
                 </span>
+            </div>
+            <div v-if="reader.status === 'Blocked' && reader.lockReason" class="alert alert-danger mx-4 mt-3 mb-0 py-2 px-3 small">
+                <i class="fas fa-lock mr-1"></i> <strong>Lý do khóa:</strong> {{ reader.lockReason }}
             </div>
             <div class="card-body p-4">
                 <div class="row">

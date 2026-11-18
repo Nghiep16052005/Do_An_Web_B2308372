@@ -103,7 +103,10 @@ export default {
                     Theo dõi tình trạng các cuốn sách bạn đang mượn và lịch sử trả sách
                 </p>
             </div>
-            <div class="mt-3 mt-md-0">
+            <div class="mt-3 mt-md-0 d-flex align-items-center">
+                <router-link :to="{ name: 'client-return-books' }" class="btn btn-outline-danger btn-sm mr-2 font-weight-semibold shadow-sm">
+                    <i class="fas fa-undo-alt mr-1"></i> Xử lý Trả / Báo mất & Hư sách
+                </router-link>
                 <button class="btn btn-outline-primary btn-sm" @click="fetchRecords">
                     <i class="fas fa-sync-alt mr-1"></i> Làm mới
                 </button>
@@ -178,6 +181,9 @@ export default {
                                 </span>
                                 <span v-else-if="r.status === 'Returned'" class="badge badge-success">
                                     Đã trả
+                                </span>
+                                <span v-else-if="r.status === 'Lost'" class="badge badge-dark">
+                                    <i class="fas fa-times-circle mr-1"></i> Làm mất sách
                                 </span>
                                 <span v-else class="badge badge-secondary">
                                     {{ r.status }}

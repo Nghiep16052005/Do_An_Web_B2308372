@@ -24,7 +24,7 @@ const notificationSchema = new mongoose.Schema(
         },
         type: {
             type: String,
-            enum: ["BORROW", "RETURN", "SYSTEM"],
+            enum: ["BORROW", "RETURN", "SYSTEM", "PENALTY", "WARNING"],
             default: "SYSTEM"
         },
         isRead: {

@@ -1,13 +1,18 @@
 const BorrowRecord = require("../../models/BorrowRecord.model");
 const Book = require("../../models/Book.model");
 const Reader = require("../../models/Reader.model");
+const Penalty = require("../../models/Penalty.model");
 const Notification = require("../../models/Notification.model");
 const sse = require("../../utils/sse.util");
+const { checkAndApplyOverduePenalties } = require("../../utils/penalty.util");
 
 // Get current reader's borrow records
 module.exports.getMyBorrowRecords = async (req, res) => {
     try {
         const readerId = req.user.readerId;
+
+        // Tự động kiểm tra quá hạn và cảnh cáo/áp dụng phạt
+        await checkAndApplyOverduePenalties(readerId);
 
         const borrowRecords = await BorrowRecord.find({
             readerId: readerId
@@ -44,6 +49,9 @@ module.exports.borrowBook = async (req, res) => {
         const readerId = req.user.readerId;
         const { bookId, dueDate } = req.body;
 
+        // Quét tự động cảnh báo & khóa tài khoản nếu nợ phạt quá 3 ngày
+        await checkAndApplyOverduePenalties(readerId);
+
         // Check reader
         const reader = await Reader.findOne({
             readerId: readerId
@@ -52,15 +60,19 @@ module.exports.borrowBook = async (req, res) => {
         if (!reader) {
             return res.status(404).json({
                 success: false,
-                message: "Reader not found."
+                message: "Không tìm thấy thông tin độc giả."
             });
         }
 
-        // Check reader status
+        // Check reader status (Đặc biệt xử lý nếu tài khoản bị Blocked do quá hạn nộp phạt 3 ngày)
         if (reader.status !== "Active") {
+            const blockMsg = reader.status === "Blocked"
+                ? (reader.lockReason || "Tài khoản của bạn đã bị KHÓA TẠM THỜI do quá 3 ngày chưa nộp phạt. Vui lòng thanh toán khoản nợ tại mục Trả sách để được tự động mở lại tài khoản.")
+                : "Tài khoản độc giả chưa kích hoạt hoặc đã ngừng hoạt động.";
             return res.status(403).json({
                 success: false,
-                message: "Reader account is inactive."
+                code: reader.status === "Blocked" ? "ACCOUNT_BLOCKED" : "ACCOUNT_INACTIVE",
+                message: blockMsg
             });
         }
 
@@ -95,6 +107,39 @@ module.exports.borrowBook = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "Bạn đang mượn hoặc đang gửi yêu cầu trả cuốn sách này rồi, vui lòng đợi duyệt trước khi mượn tiếp."
+            });
+        }
+
+        // Tình huống 4: Chặn mượn sách nếu độc giả đang có tiền phạt chưa thanh toán
+        const pendingPenalties = await Penalty.find({
+            readerId: readerId,
+            status: "Pending"
+        });
+
+        if (pendingPenalties && pendingPenalties.length > 0) {
+            const totalDebt = pendingPenalties.reduce((sum, p) => sum + (p.fineAmount || 0), 0);
+            const formattedDebt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(totalDebt);
+            return res.status(403).json({
+                success: false,
+                code: "UNPAID_PENALTIES",
+                message: `Tài khoản của bạn đang có ${pendingPenalties.length} biên bản phạt chưa thanh toán (tổng nợ: ${formattedDebt}). Vui lòng hoàn tất nộp phạt tại mục "Trả sách" trước khi mượn sách mới.`,
+                pendingCount: pendingPenalties.length,
+                totalDebt
+            });
+        }
+
+        // Tình huống 4 (bổ sung): Chặn mượn nếu có sách quá hạn chưa trả
+        const overdueRecords = await BorrowRecord.find({
+            readerId: readerId,
+            status: "Overdue"
+        });
+
+        if (overdueRecords && overdueRecords.length > 0) {
+            return res.status(403).json({
+                success: false,
+                code: "OVERDUE_BOOKS",
+                message: `Bạn đang có ${overdueRecords.length} cuốn sách quá hạn chưa hoàn trả cho thư viện. Vui lòng hoàn trả các sách quá hạn trước khi đăng ký mượn thêm sách mới.`,
+                overdueCount: overdueRecords.length
             });
         }
 

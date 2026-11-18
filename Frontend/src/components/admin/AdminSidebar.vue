@@ -69,6 +69,16 @@ export default {
                 <span v-if="!collapsed">Mượn trả sách</span>
             </router-link>
 
+            <router-link 
+                :to="{ name: 'admin-penalties' }" 
+                class="nav-link text-nowrap"
+                active-class="active"
+                :title="collapsed ? 'Vi phạm & Tiền phạt' : ''"
+            >
+                <i class="fas fa-file-invoice-dollar fa-fw"></i>
+                <span v-if="!collapsed">Vi phạm & Tiền phạt</span>
+            </router-link>
+
             <hr style="border-color: rgba(255, 255, 255, 0.1); width: 85%; margin: 1.5rem auto;">
 
             <router-link 

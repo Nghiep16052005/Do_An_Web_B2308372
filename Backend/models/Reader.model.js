@@ -46,8 +46,19 @@ const readerSchema = new mongoose.Schema(
 
         status: {
             type: String,
-            enum: ["Active", "Inactive"],
+            enum: ["Active", "Inactive", "Blocked"],
             default: "Active"
+        },
+
+        lockReason: {
+            type: String,
+            default: "",
+            trim: true
+        },
+
+        lockedAt: {
+            type: Date,
+            default: null
         }
     },
     {
